@@ -37,3 +37,11 @@ To interact with continuous integration using GitHub Actions, you need to have a
 
 {% include links.md %}
 github: github.com
+
+
+## Download files
+
+We'll be working with some existing pieces of example software for this lesson. Download [this archive][zip-file] and extract it to a convenient location&mdash;for example, your desktop.
+
+
+[zip-file]: {{ page.root }}/data/code-testing.zip
