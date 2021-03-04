@@ -7,10 +7,10 @@ root: .
 ## Instructional Material
 
 This instructional material and accompanying example code is
-made available under the [Creative Commons Attribution Sharealike
-license][cc-by-sa-human]. The following is a human-readable summary of
-(and not a substitute for) the [full legal text of the CC BY SA 4.0
-license][cc-by-sa-legal].
+made available under the [Creative Commons Attribution-NonCommercial-Sharealike
+license][cc-by-nc-sa-human]. The following is a human-readable summary of
+(and not a substitute for) the [full legal text of the CC BY-NC-SA 4.0
+license][cc-by-nc-sa-legal].
 
 You are free:
 
@@ -28,9 +28,11 @@ Under the following terms:
   your work is derived from work that is Copyright © Software
   Carpentry and, where practical, linking to
   http://software-carpentry.org/), provide a [link to the
-  license][cc-by-sa-human], and indicate if changes were made. You may do
+  license][cc-by-nc-sa-human], and indicate if changes were made. You may do
   so in any reasonable manner, but not in any way that suggests the
   licensor endorses you or your use.
+  
+* **NonCommercial** — You may not use the material for commercial purposes.
   
 * **ShareAlike** — If you remix, transform, or build upon the material, 
   you must distribute your contributions under the same license as the
@@ -55,8 +57,8 @@ Notices:
 "Software Carpentry" and "Data Carpentry" and their respective logos
 are registered trademarks of [Community Initiatives][CI].
 
-[cc-by-sa-human]: https://creativecommons.org/licenses/by-sa/4.0/
-[cc-by-sa-legal]: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+[cc-by-nc-sa-human]: https://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-nc-sa-legal]: https://creativecommons.org/licenses/by-sa/4.0/legalcode
 [mit-license]: https://opensource.org/licenses/mit-license.html
 [ci]: http://communityin.org/
 [osi]: https://opensource.org
