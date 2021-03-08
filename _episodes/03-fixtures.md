@@ -10,7 +10,7 @@ objectives:
 - "Understand when to mark fixtures for re-use and be able to do so."
 keypoints:
 - "A _fixture_ is a piece of test data that can be passed to multiple tests."
-- "Define a fixture by creating a function with the `@pytest.fixture` decorator that returns the desired data. Any test that takes an argument of the same name will receive the data in the fixture.
+- "Define a fixture by creating a function with the `@pytest.fixture` decorator that returns the desired data. Any test that takes an argument of the same name will receive the data in the fixture."
 - "Set the `scope` parameter to the `@pytest.fixture` decorator to control if and where the fixture is re-used across multiple tests. For example. `scope="session"` reuses the fixture for the complete run of tests."
 ---
 
@@ -377,7 +377,7 @@ Now it only takes about as long as a single test did since the slow part is only
 >> If a test (or a function called by the test) accepts a mutable argument, and then mutates it, then any other tests depending on that fixture that run after the badly-behaved test will receive different data than were originally specified in the fixture. This means that the test is likely to fail.
 >>
 >> Fixtures should only be re-used within groups of tests that do not mutate them.
-> {: .callout}
+> {: .solution}
 {: .challenge}
 
 [urllib-request]: https://docs.python.org/3/library/urllib.request.html

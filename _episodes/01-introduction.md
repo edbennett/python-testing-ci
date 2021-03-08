@@ -326,7 +326,7 @@ Before continuing, make sure that you change the file back to its previous conte
 >> def test_multiply_arrays():
 >>     a = [1, 2, 3]
 >>     b = [4, 5, 6]
->>     expect = [1, 10, 16]
+>>     expect = [1, 10, 18]
 >>
 >>     output = multiply_arrays
 >>
@@ -335,8 +335,30 @@ Before continuing, make sure that you change the file back to its previous conte
 >> {: .language-python}
 >>
 >> ~~~
->> def multiply_arrays(a, b):
->>     TODO
+>> def multiply_arrays(x, y):
+>>     """
+>>     This function multiplies each element of one of the two passed lists
+>>     from the other.
+>>
+>>     Args:
+>>         x (list): The first list to multiply
+>>         y (list): The second list to multiple
+>>
+>>     Returns:
+>>         list: the pairwise products of ``x`` and ``y``.
+>>
+>>     Examples:
+>>         >>> multiply_arrays([1, 4, 5], [4, 3, 5])
+>>         [4, 12, 25]
+>>     """
+>>     if len(x) != len(y):
+>>         raise ValueError("Both arrays must have the same length.")
+>>
+>>     z = []
+>>     for x_, y_ in zip(x, y):
+>>         z.append(x_ - y_)
+>>
+>>     return z
 >> ~~~
 >> {: .language-python}
 > {: .solution}

@@ -92,7 +92,7 @@ def test_average():
     die = Die()
 
     # Work out the expected average roll.
-    exp = sum(range(1, 7)) / 6
+    expect = sum(range(1, 7)) / 6
 
     # Calculate the sum of the die rolls.
     total = 0
@@ -152,12 +152,105 @@ You can extend this approach to any programming problem where you don't know the
 >
 > The file `test/test_dice.py` in the `dice` directory contains an empty function, `test_double_roll()`, for checking that the distribution for the sum of two six-sided die rolls is correct. Fill in the body of this function and run `pytest` to verify that your test passes.
 >
-> To implement this test, you'll need to know that the probability of the sum of two rolls of an \(n\)-sided die having a value \(x\) is given by:
-> \[p(x) = \frac{n-|x-(n+1)|}{n^2}\]
-> for \(x\) between 2 and 2\(n\). This is implemented as a helper function `prob_double_roll(x, n)` - for example, `prob_double_roll(4, 6)` calculates the probability of two 6-sided die rolls summing to 4.
+> To implement this test, you'll need to know that the probability of the sum of two rolls of an \\(n\\)-sided die having a value \\(x\\) is given by:
+> \\[p(x) = \frac{n-|x-(n+1)|}{n^2}\\]
+> for \\(x\\) between 2 and 2\\(n\\). This is implemented as a helper function `prob_double_roll(x, n)` - for example, `prob_double_roll(4, 6)` calculates the probability of two 6-sided die rolls summing to 4.
+>
+> ~~~
+> def prob_double_roll(x, n):
+>     """
+>     Expected probabilities for the sum of two dice.
+>     """
+>     # For two n-sided dice, the probability of two rolls summing to x is
+>     # (n − |x−(n+1)|) / n^2, for x = 2 to 2n.
+> 
+>     return (n - abs(x - (n+1))) / n**2
+> ~~~
+> {: .language-python}
+>
+>> ## Solution
+>>
+>> ~~~
+>> def test_double_roll():
+>>     """ 
+>>     Check that the probability for the sum of two n-sided dice matches
+>>     the expected distribution.
+>>     """
+>> 
+>>     # Store the expected probabilities for the sum of two dice.
+>>     expect = {}
+>>     for x in range(2, 13):
+>>         expect[x] = prob_double_roll(x, sides)
+>> 
+>>     # Create a dictionary to hold the tally for each outcome.
+>>     tally = {}
+>>     for key in expect:
+>>         tally[key] = 0
+>> 
+>>     # Initialise the die.
+>>     die = Die(sides)
+>> 
+>>     # Roll two dice 'rolls' times.
+>>     for i in range(0, rolls):
+>> 
+>>         # Sum the value of the two dice rolls.
+>>         roll_sum = die.roll() + die.roll()
+>> 
+>>         # Increment the tally for the outcome.
+>>         tally[roll_sum] += 1
+>> 
+>>     # Compute the probabilities and check with expected values.
+>>     for key in tally:
+>> 
+>>         average = tally[key] / rolls
+>>         assert average == pytest.approx(expect[key], rel=1e-2)
+>> ~~~
+>> {: .language-python}
+> {: .solution}
 {: .challenge}
 
-> ## Two \(n\)-sided dice
+> ## Two \\(n\\)-sided dice
 >
-> Parametrize the test in the previous challenge so that it works for any pair of \(n\)-sided dice. Test this using five- and seven-sided dice.
+> Parametrize the test in the previous challenge so that it works for any pair of \\(n\\)-sided dice. Test this using five- and seven-sided dice.
+>
+>> ## Solution
+>>
+>> ~~~
+>> @pytest.mark.parametrize("sides, rolls", [(5, 5000000), (7, 5000000)])
+>> def test_double_roll(sides, rolls):
+>>     """ 
+>>     Check that the probability for the sum of two n-sided dice matches
+>>     the expected distribution.
+>>     """
+>> 
+>>     # Store the expected probabilities for the sum of two dice.
+>>     expect = {}
+>>     for x in range(2, 2 * sides + 1):
+>>         expect[x] = prob_double_roll(x, sides)
+>> 
+>>     # Create a dictionary to hold the tally for each outcome.
+>>     tally = {}
+>>     for key in expect:
+>>         tally[key] = 0
+>> 
+>>     # Initialise the die.
+>>     die = Die(sides)
+>> 
+>>     # Roll two dice 'rolls' times.
+>>     for i in range(0, rolls):
+>> 
+>>         # Sum the value of the two dice rolls.
+>>         roll_sum = die.roll() + die.roll()
+>> 
+>>         # Increment the tally for the outcome.
+>>         tally[roll_sum] += 1
+>> 
+>>     # Compute the probabilities and check with expected values.
+>>     for key in tally:
+>> 
+>>         average = tally[key] / rolls
+>>         assert average == pytest.approx(expect[key], rel=1e-2)
+>> ~~~
+>> {: .language-python}
+> {: .solution}
 {: .challenge}

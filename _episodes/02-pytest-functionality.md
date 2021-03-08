@@ -264,7 +264,7 @@ platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bi
 cachedir: .pytest_cache
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 3 items                                          
+collected 3 items
 
 test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [ 33%]
 test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [ 66%]
@@ -277,6 +277,20 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 > ## Parametrize tests with errors
 >
 > Try and parametrize the `test_add_arrays_error()` test that we've just written.
+>
+>> ## Solution
+>>
+>> ~~~
+>> @pytest.mark.parametrize("a, b, expected_error", [
+>>     ([1, 2, 3], [4, 5], ValueError),
+>>     ([1, 2], [4, 5, 6], ValueError),
+>> ])
+>> def test_add_arrays_error(a, b, expected_error):
+>>     with pytest.raises(expected_error):
+>>         output = add_arrays(a, b)
+>> ~~~
+>> {: .language-python}
+> {: .solution}
 {: .challenge}
 
 > ## Fix the function
@@ -286,7 +300,37 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 > 1. cause a bad implementation of the function to not work correctly, or
 > 2. cause a good implementation of the function to raise an exception.
 >
-> Use your tests to identify and fix the bug in `divide_arrays()` 
+> Use your tests to identify and fix the bug in `divide_arrays()`
+>
+>> ## Solution
+>>
+>> ~~~
+>> @pytest.mark.parametrize("a, b, expect", [
+>>     ([1, 4, 12], [1, 2, 6], [1, 2, 2]), # Test integers
+>>     ([-1, -45, 128], [-1, 9, -32], [1, -5, -4]), # Test negative numbers
+>>     ([6], [3], [2]), # Test single-element lists
+>>     ([1, 2, 3], [4, 5, 6], [0.25, 0.4, 0.5]), # Test non-integers
+>>     ([], [], []), # Test empty lists
+>> ])
+>> def test_divide_arrays(a, b, expect):
+>>     output = divide_arrays(a, b)
+>>
+>>     assert output == expect
+>>
+>>
+>> @pytest.mark.parametrize("a, b, expected_error", [
+>>     ([1, 2, 3], [4, 5], ValueError),
+>>     ([1, 2], [4, 5, 6], ValueError),
+>>     ([1, 2, 3], [0, 1, 2], ZeroDivisionError),
+>> ])
+>> def test_divide_arrays_error(a, b, expected_error):
+>>     with pytest.raises(expected_error):
+>>         output = divide_arrays(a, b)
+>> ~~~
+>> {: .language-python}
+>>
+>> In this case, the implementation of `divide_arrays` does not correctly deal with pairs of numbers that do not divide exactly. This is because the implementation has accidentally used `//` instead of `/`. Replacing `//` with `/` in the implementation allows the test to pass.
+> {: .solution}
 {: .challenge}
 
 
