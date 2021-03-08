@@ -35,13 +35,12 @@ $ pip install pytest
 
 To interact with continuous integration using GitHub Actions, you need to have a GitHub account. To do this, visit [GitHub][github] and sign up for an account, or check that you're able to log in.
 
-{% include links.md %}
-github: github.com
-
-
 ## Download files
 
 We'll be working with some existing pieces of example software for this lesson. Download [this archive][zip-file] and extract it to a convenient location&mdash;for example, your desktop.
 
 
+{% include links.md %}
+
+[github]: github.com
 [zip-file]: {{ page.root }}/data/code-testing.zip
