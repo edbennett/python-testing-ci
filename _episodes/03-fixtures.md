@@ -11,7 +11,7 @@ objectives:
 keypoints:
 - "A _fixture_ is a piece of test data that can be passed to multiple tests."
 - "Define a fixture by creating a function with the `@pytest.fixture` decorator that returns the desired data. Any test that takes an argument of the same name will receive the data in the fixture."
-- "Set the `scope` parameter to the `@pytest.fixture` decorator to control if and where the fixture is re-used across multiple tests. For example. `scope="session"` reuses the fixture for the complete run of tests."
+- "Set the `scope` parameter to the `@pytest.fixture` decorator to control if and where the fixture is re-used across multiple tests. For example. `scope=\"session\"` reuses the fixture for the complete run of tests."
 ---
 
 As we saw in the last section, when using parametrization it's often useful to split your test function into two logical parts:
