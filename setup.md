@@ -43,4 +43,4 @@ We'll be working with some existing pieces of example software for this lesson. 
 {% include links.md %}
 
 [github]: github.com
-[zip-file]: {{ page.root }}/data/code-testing.zip
+[zip-file]: {{ page.root }}/files/code-testing.zip
