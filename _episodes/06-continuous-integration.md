@@ -121,9 +121,9 @@ $ git branch -M main
 ~~~
 {: .language-bash}
 
-Go to your [GitHub][github] profile page and create a new repository called `grid`. (It's important that you use this exact name!) To do so click on the **Repositories** tab, then the **New** button. Leave the check box for "Initialize this repository with a README" _unchecked_.
+Go to your [GitHub][github] profile page and create a new repository called `grid`. (It's important that you use this exact name!) To do so click on the **Repositories** tab, then the **New** button. Set the Repository template to "No template", and leave the check boxes for "Add a README file", "Add .gitignore", and "Choose a license" _unchecked_.
 
-TODO: SCREENSHOT
+![Screen shot of the GitHub Create Repository screen with these options set](../fig/ci-1.png)
 
 Back on the command line we can now add a URL for the new remote repository that you just created. Once again, replace `USERNAME` with your actual GitHub username.
 
@@ -135,17 +135,17 @@ $ git remote add origin remote https://github.com/USERNAME/grid.git
 You can now push your commit to the remote repository.
 
 ~~~
-$ git push origin master
+$ git push origin main
 ~~~
 {: .language-bash}
 
 Since we included a `.github/workflows/pytest.yaml` workflow to run on commit to the default branch, GitHub will automatically detect this and initiate a build. If you visit the GitHub page for the repository you will see a build status image on the main page.
 
-TODO: SCREENSHOT
+![Screen shot of the GitHub repository page showing the build status badge](../fig/ci-2.png)
 
 Clicking on this will take you to the GitHub Actions page for the test workflow, where you can see the progress of the current build, as well as the details of any previous builds. You should see the status reported as failed. In addition, you might also receive an email notifying you of the error.
 
-TODO: SCREENSHOT
+![Screen shot of the workflow display showing the workflow status as failed](../fig/ci-3.png)
 
 > ## Don't do this
 >
@@ -157,7 +157,14 @@ TODO: SCREENSHOT
 
 Because we've noticed that the tests are failing, we can open an _issue_ on GitHub to alert people to this. Click on the **Issues** tab followed by the **New issue** button. Give your issue whatever title you like, then hit submit. It's good practice to give a minimal example that illustrates the problem. This helps the owner of the repository to reproduce the problem. You could also provide a new unit test if none of the current ones trigger the bug. In this case, we already have a good test that catches the error.
 
-TODO: SCREENSHOT
+![Screen shot of a recently created issue, with the title "Cells at top of grid have incorrect neighbour counts" and the text "There appears to be a bug with cells in the top row of a grid. For example, the following fails:
+
+# Cell on top edge of 4x4 grid.
+c = Cell(2, 3, 4, 4)
+
+# Should have 3 neighbours.
+assert c.neighbours() == 3
+"](ci-4.png)
 
 
 ## Pushing a fix
@@ -179,11 +186,13 @@ $ git push
 
 The commit will now appear on GitHub, and GitHub Actions will run another build using the updated version of the code. Once the build is complete you should hopefully see a green status badge on the repository homepage to indicate that it passed.
 
-TODO: SCREENSHOT
+![Screen shot of the repository page and README showing a badge indicating a successful build.](ci-5.png)
+![Screen shot of the workflow page showing the most recent run succeeded.](ci-6.png)
 
 Take another look at the **Issues** tab. You should see that the issue that you opened is now _closed_. This happened automatically because we included the phrase "`closes #1`" somewhere in our commit message. Here `#1` is the issue number&mdash;in this case, indicating that it is the first issue that was opened.
 
-TODO: SCREENSHOT
+![Screen shot of the list of closed issues, showing the issue we created above as closed.](ci-7.png)
+![Screen shot of the issue, showing it as closed in the commit c79844a.](ci-8.png)
 
 ## Skipping a CI build
 
@@ -207,6 +216,7 @@ $ git push
 
 If you go to the GitHub page for your `grid` repository you should find that there wasn't a third CI build. On the GitHub page you can click on where it says "`3 commits`" to show the commit history. There should be a red cross (failed) next to the first commit, a green tick (passed) next to the second, and nothing (skipped) next to the third.
 
+![Screen shot of the commit history for the grid repository, showing the most recent commit does not have a GitHub Actions workflow run associated with it.](ci-9.png)
 
 > ## Try it yourself
 >
