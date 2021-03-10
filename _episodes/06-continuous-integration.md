@@ -32,9 +32,9 @@ name: Run tests
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ main ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -60,7 +60,7 @@ jobs:
 ~~~
 {: .language-yaml}
 
-This is a decent chunk of content, so let's break it down. At the highest level, there are three items: `name`, `on`, and `jobs`. `name` defines a name for the action, so if you have many actions you can identify which one has done what. `on` identifies when this action should run. In this case we run the action whenever there is a push to the default branch (usually `master` or `main`), or a pull request to it. Finally, we define one job, which is to build (and run) the software).
+This is a decent chunk of content, so let's break it down. At the highest level, there are three items: `name`, `on`, and `jobs`. `name` defines a name for the action, so if you have many actions you can identify which one has done what. `on` identifies when this action should run. In this case we run the action whenever there is a push to the `main` branch, or a pull request to it. Finally, we define one job, which is to build (and run) the software).
 
 The `build` job then defines what it needs: to run on the most recent version of Ubuntu, and to test three Python versions, each of which will run entirely separately. Then it lists the steps that it will perform: first it checks out the repository, then sets up the version of Python selected for this run, then install any dependencies necessary for the software to run, and finally run `pytest`.
 
@@ -84,7 +84,7 @@ $ cd grid
 ~~~
 {: .language-bash}
 
-Edit `README.md` so that both instances of `USERNAME` are replaced by your GitHub username.
+Edit `README.md` so that both occurrences of `USERNAME` are replaced by your GitHub username.
 
 Also edit `grid.py` to re-introduce the bug that you fixed earlier. (Replace `h-1` with `w` on line 133.) Run `pytest` to check that the tests fail.
 
@@ -111,6 +111,13 @@ Commit the files that you've staged in your local repository.
 
 ~~~
 $ git commit -m "Initial commit."
+~~~
+{: .language-bash}
+
+Finally, rename the branch to `main`, to match the branch name we are checking for pushes to in our workflow.
+
+~~~
+$ git branch -M main
 ~~~
 {: .language-bash}
 

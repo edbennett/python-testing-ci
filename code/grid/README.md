@@ -1,7 +1,7 @@
 # CI Test
 
-[![Build Status](https://travis-ci.org/USERNAME/grid.svg?branch=master)](https://travis-ci.org/USERNAME/grid)
+[![Run tests](https://github.com/USERNAME/grid/actions/workflows/pytest.yaml/badge.svg)](https://github.com/USERNAME/grid/actions/workflows/pytest.yaml)
+
 
 ## About
-A repository to test continuous integration for the [Python and Data](http://chryswoods.com/python_and_data)
-workshop at the University of Bristol, Dec 2017.
+A repository to test continuous integration for the [Introduction to Testing and Continuous Integration in Python](https://edbennett.github.io/python-testing-ci) lesson.
