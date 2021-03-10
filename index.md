@@ -14,10 +14,10 @@ Continuous Integration (CI) takes automated testing to the next step, automatica
 {: .prereq}
 
 {% include links.md %}
-circleci: https://circleci.com
-git-novice: https://swcarpentry.github.io/git-novice
-github: https://github.com
-gitlab: https://gitlab.com
-pytest: https://pytest.org
-python-novice-inflammation: https://swcarpentry.github.io/python-novice-inflammation
-shell-novice: https://swcarpentry.github.io/shell-novice
+[circleci]: https://circleci.com
+[git-novice]: https://swcarpentry.github.io/git-novice
+[github]: https://github.com
+[gitlab]: https://gitlab.com
+[pytest]: https://pytest.org
+[python-novice-inflammation]: https://swcarpentry.github.io/python-novice-inflammation
+[shell-novice]: https://swcarpentry.github.io/shell-novice
