@@ -164,7 +164,7 @@ c = Cell(2, 3, 4, 4)
 
 # Should have 3 neighbours.
 assert c.neighbours() == 3
-"](ci-4.png)
+"](../fig/ci-4.png)
 
 
 ## Pushing a fix
@@ -186,13 +186,13 @@ $ git push
 
 The commit will now appear on GitHub, and GitHub Actions will run another build using the updated version of the code. Once the build is complete you should hopefully see a green status badge on the repository homepage to indicate that it passed.
 
-![Screen shot of the repository page and README showing a badge indicating a successful build.](ci-5.png)
-![Screen shot of the workflow page showing the most recent run succeeded.](ci-6.png)
+![Screen shot of the repository page and README showing a badge indicating a successful build.](../fig/ci-5.png)
+![Screen shot of the workflow page showing the most recent run succeeded.](../fig/ci-6.png)
 
 Take another look at the **Issues** tab. You should see that the issue that you opened is now _closed_. This happened automatically because we included the phrase "`closes #1`" somewhere in our commit message. Here `#1` is the issue number&mdash;in this case, indicating that it is the first issue that was opened.
 
-![Screen shot of the list of closed issues, showing the issue we created above as closed.](ci-7.png)
-![Screen shot of the issue, showing it as closed in the commit c79844a.](ci-8.png)
+![Screen shot of the list of closed issues, showing the issue we created above as closed.](../fig/ci-7.png)
+![Screen shot of the issue, showing it as closed in the commit c79844a.](../fig/ci-8.png)
 
 ## Skipping a CI build
 
@@ -216,7 +216,13 @@ $ git push
 
 If you go to the GitHub page for your `grid` repository you should find that there wasn't a third CI build. On the GitHub page you can click on where it says "`3 commits`" to show the commit history. There should be a red cross (failed) next to the first commit, a green tick (passed) next to the second, and nothing (skipped) next to the third.
 
-![Screen shot of the commit history for the grid repository, showing the most recent commit does not have a GitHub Actions workflow run associated with it.](ci-9.png)
+![Screen shot of the commit history for the grid repository, showing the most recent commit does not have a GitHub Actions workflow run associated with it.](../fig/ci-9.png)
+
+> ## Other GitHub actions
+>
+> GitHub has a whole catalogue of example workflows available that can do a wide variety of things. A few are suggested when you click the **New Workflow** button in the **Actions** tab, and more can be found at [the `starter-workflows` repository](starter-workflows). Some possibilities are to automatically push new releases to [PyPI][pypi], and to automatically style check all code against a defined house style (for example, PEP 8).
+{: .callout}
+
 
 > ## Try it yourself
 >
@@ -236,4 +242,6 @@ If you go to the GitHub page for your `grid` repository you should find that the
 
 [ci]: https://en.wikipedia.org/wiki/Continuous_integration
 [github]: https://github.com
+[pypi]: https://pypi.org
+[starter-workflows]: https://github.com/actions/starter-workflows
 [yaml]: https://en.wikipedia.org/wiki/YAML
