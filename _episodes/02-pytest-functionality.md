@@ -16,14 +16,22 @@ keypoints:
 - "Use `pytest --doctest-modules` to check the examples given in any docstrings, and ensure that the output given is correct."
 ---
 
-In the previous episode, we used `pytest` as a test runner. That is to say, it we used the fact that it looks through the current directory (and subdirectories) to find anything that looks like a test, and runs it. This is already incredibly useful, but is only a small slice of what pytest can do. When imported as a module into your tests, pytest gives additional functionality that makes your tests much more powerful.
+In the previous episode, we used `pytest` as a test runner. That is to say, it
+we used the fact that it looks through the current directory (and
+subdirectories) to find anything that looks like a test, and runs it. This is
+already incredibly useful, but is only a small slice of what pytest can do. When
+imported as a module into your tests, pytest gives additional functionality that
+makes your tests much more powerful.
 
 
 ## Avoiding repetition
 
-Having a single test for a function is already infinitely better than having none, but one test only gives you so much confidence. The real power of a test suite is being able to test your functions under lots of different conditions.
+Having a single test for a function is already infinitely better than having
+none, but one test only gives you so much confidence. The real power of a test
+suite is being able to test your functions under lots of different conditions.
 
-Lets add a second test to check a different set of inputs and outputs to the `add_arrays` function and check that it passes:
+Lets add a second test to check a different set of inputs and outputs to the
+`add_arrays` function and check that it passes:
 
 ~~~
 from arrays import add_arrays
@@ -32,23 +40,25 @@ def test_add_arrays1():
     a = [1, 2, 3]
     b = [4, 5, 6]
     expect = [5, 7, 9]
-    
+
     output = add_arrays(a, b)
-    
+
     assert output == expect
 
 def test_add_arrays2():
     a = [-1, -5, -3]
     b = [-4, -3, 0]
     expect = [-5, -8, -3]
-    
+
     output = add_arrays(a, b)
-    
+
     assert output == expect
 ~~~
 {: .language-python}
 
-When we run `pytest` we can optionally pass the `-v` flag which puts it in verbose mode. This will print out the tests being run, one per line which I find a more useful view most of the time:
+When we run `pytest` we can optionally pass the `-v` flag which puts it in
+verbose mode. This will print out the tests being run, one per line which I find
+a more useful view most of the time:
 
 ~~~
 $ pytest -v
@@ -61,7 +71,7 @@ platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bi
 cachedir: .pytest_cache
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 2 items                                          
+collected 2 items
 
 test_arrays.py::test_add_arrays1 PASSED              [ 50%]
 test_arrays.py::test_add_arrays2 PASSED              [100%]
@@ -70,7 +80,11 @@ test_arrays.py::test_add_arrays2 PASSED              [100%]
 ~~~
 {: .output}
 
-We see both tests being run and passing. This will work well but we've had to repeat ourselves almost entirely in each test function. The only difference between the two functions is the inputs and outputs under test. Usually in this case in a normal Python function you would take these things as arguments and we can do the same thing here.
+We see both tests being run and passing. This will work well but we've had to
+repeat ourselves almost entirely in each test function. The only difference
+between the two functions is the inputs and outputs under test. Usually in this
+case in a normal Python function you would take these things as arguments and we
+can do the same thing here.
 
 The actual logic of the function is the following:
 
@@ -81,14 +95,24 @@ def test_add_arrays(a, b, expect):
 ~~~
 {: .language-python}
 
-We then just need a way of passing the data we want to check into this function. Since we're not explicitly calling this function ourselves, we need a way to tell pytest that it should pass in certain arguments. For this, pytest provides a feature called _parametrization_. We label our function with a _decoration_ which allows pytest to run it mutliple times with different data.
+We then just need a way of passing the data we want to check into this function.
+Since we're not explicitly calling this function ourselves, we need a way to
+tell pytest that it should pass in certain arguments. For this, pytest provides
+a feature called _parametrization_. We label our function with a _decoration_
+which allows pytest to run it mutliple times with different data.
 
 > ## What's a decorator?
 >
-> A decorator is a function that takes a function and gives it extra behavior. This is done by putting the name of the decorator after an `@` sign, before the function definition. We won't go into detail about decorators in this lesson, but more details on what they are and how you can write your own can be found in the lesson on [Object-oriented programming with Python][python-oop-novice].
+> A decorator is a function that takes a function and gives it extra behavior.
+> This is done by putting the name of the decorator after an `@` sign, before
+> the function definition. We won't go into detail about decorators in this
+> lesson, but more details on what they are and how you can write your own can
+> be found in the lesson on [Object-oriented programming with
+> Python][python-oop-novice].
 {: .callout}
 
-To use this feature we must import the pytest module and use the `pytest.mark.parametrize`` decorator like the following:
+To use this feature we must import the pytest module and use the
+`pytest.mark.parametrize`` decorator like the following:
 
 ~~~
 import pytest
@@ -101,17 +125,19 @@ from arrays import add_arrays
 ])
 def test_add_arrays(a, b, expect):
     output = add_arrays(a, b)
-    
+
     assert output == expect
 ~~~
 {: .language-python}
 
 The parametrize decorator takes two arguments:
 
-1. a string containing the names of the parameters you want to pass in ("a, b, expect")
+1. a string containing the names of the parameters you want to pass in ("a, b,
+   expect")
 2. a list containing the values of the arguments you want to pass in
 
-In this case, the test will be run twice. Once with each of the following values:
+In this case, the test will be run twice. Once with each of the following
+values:
 
 1. `a = [1, 2, 3]`, `b = [4, 5, 6]`, `expect = [5, 7, 9]`
 2. `a = [-1, -5, -3]`, `b = [-4, -3, 0]`, `expect = [-5, -8, -3]`
@@ -129,7 +155,7 @@ platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bi
 cachedir: .pytest_cache
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 2 items                                          
+collected 2 items
 
 test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [ 50%]
 test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [100%]
@@ -138,19 +164,22 @@ test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [100%]
 ~~~
 {: .output}
 
-We see that both tests have the same name (`test_arrays.py::test_add_arrays`) but each parametrization is differentiated with some square brackets.
+We see that both tests have the same name (`test_arrays.py::test_add_arrays`)
+but each parametrization is differentiated with some square brackets.
 
 > ## More parameters
 >
-> Add some more parameters sets to the `test_add_arrays` function. Try to think about corner-cases that might make the function fail. It's your job as the tester to try to "break" the code.
+> Add some more parameters sets to the `test_add_arrays` function. Try to think
+> about corner-cases that might make the function fail. It's your job as the
+> tester to try to "break" the code.
 >
 >> ## Solution
 >>
 >> ~~~
 >> import pytest
->> 
+>>
 >> from arrays import add_arrays
->> 
+>>
 >> @pytest.mark.parametrize("a, b, expect", [
 >>     ([1, 2, 3], [4, 5, 6], [5, 7, 9]),
 >>     ([-1, -5, -3], [-4, -3, 0], [-5, -8, -3]), # Test zeros
@@ -169,9 +198,13 @@ We see that both tests have the same name (`test_arrays.py::test_add_arrays`) bu
 
 ## Failing correctly
 
-The interface of a function is made up of the _parameters_ it expects and the values that it _returns_. If a user of a function knows these things then they are able to use it correctly. This is why we make sure to include this information in the docstring for all our functions.
+The interface of a function is made up of the _parameters_ it expects and the
+values that it _returns_. If a user of a function knows these things then they
+are able to use it correctly. This is why we make sure to include this
+information in the docstring for all our functions.
 
-The other thing that is part of the interface of a function is any exceptions that are _raised_ by it.
+The other thing that is part of the interface of a function is any exceptions
+that are _raised_ by it.
 
 To add explicit error handling to our function we need to do two things:
 
@@ -205,7 +238,7 @@ def add_arrays(x, y):
 
     Returns:
         list: the pairwise sums of ``x`` and ``y``.
-    
+
     Raises:
         ValueError: If the length of the lists ``x`` and ``y`` are different.
 
@@ -213,10 +246,10 @@ def add_arrays(x, y):
         >>> add_arrays([1, 4, 5], [4, 3, 5])
         [5, 7, 10]
     """
-    
+
     if len(x) != len(y):
         raise ValueError("Both arrays must have the same length.")
-    
+
     z = []
     for x_, y_ in zip(x, y):
         z.append(x_ + y_)
@@ -225,11 +258,19 @@ def add_arrays(x, y):
 ~~~
 {: .language-python}
 
-We can then test that the function correctly raises the exception when passed appropriate data. Inside a pytest function we can require that a specific exception is raised by using [`pytest-raises`][pytest.raises] in a `with` block. `pytest.raises` takes as an argument the type of an exception and if the block ends without that exception having been rasied, will fail the test.
+We can then test that the function correctly raises the exception when passed
+appropriate data. Inside a pytest function we can require that a specific
+exception is raised by using [`pytest-raises`][pytest.raises] in a `with` block.
+`pytest.raises` takes as an argument the type of an exception and if the block
+ends without that exception having been rasied, will fail the test.
 
-It may seem strange that we're testing&mdash;and _requiring_&mdash;that the function raises an error but it's important that if we've told our users that the code will produce a certain error in specific circumstances that it does indeed do as we promise.
+It may seem strange that we're testing&mdash;and _requiring_&mdash;that the
+function raises an error but it's important that if we've told our users that
+the code will produce a certain error in specific circumstances that it does
+indeed do as we promise.
 
-In our code we add a new test called `test_add_arrays_error` which does the check we require:
+In our code we add a new test called `test_add_arrays_error` which does the
+check we require:
 
 ~~~
 import pytest
@@ -242,7 +283,7 @@ from arrays import add_arrays
 ])
 def test_add_arrays(a, b, expect):
     output = add_arrays(a, b)
-    
+
     assert output == expect
 
 def test_add_arrays_error():
@@ -276,7 +317,8 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 
 > ## Parametrize tests with errors
 >
-> Try and parametrize the `test_add_arrays_error()` test that we've just written.
+> Try and parametrize the `test_add_arrays_error()` test that we've just
+> written.
 >
 >> ## Solution
 >>
@@ -295,7 +337,8 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 
 > ## Fix the function
 >
-> Write some parametrized tests for the `divide_arrays()` function. Think carefully about what kind of input might:
+> Write some parametrized tests for the `divide_arrays()` function. Think
+> carefully about what kind of input might:
 >
 > 1. cause a bad implementation of the function to not work correctly, or
 > 2. cause a good implementation of the function to raise an exception.
@@ -329,14 +372,19 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 >> ~~~
 >> {: .language-python}
 >>
->> In this case, the implementation of `divide_arrays` does not correctly deal with pairs of numbers that do not divide exactly. This is because the implementation has accidentally used `//` instead of `/`. Replacing `//` with `/` in the implementation allows the test to pass.
+>> In this case, the implementation of `divide_arrays` does not correctly deal
+>> with pairs of numbers that do not divide exactly. This is because the
+>> implementation has accidentally used `//` instead of `/`. Replacing `//` with
+>> `/` in the implementation allows the test to pass.
 > {: .solution}
 {: .challenge}
 
 
 ## Doctests
 
-You may have noticed that the functions in `arrays.py` have extensive docstrings, including examples of how to use the functions defined there, looking like:
+You may have noticed that the functions in `arrays.py` have extensive
+docstrings, including examples of how to use the functions defined there,
+looking like:
 
 ~~~
 Examples:
@@ -345,7 +393,10 @@ Examples:
 ~~~
 {: .language-python}
 
-Since this is valid Python code, we can ask pytest to run this code and check that the output we claimed would be returned is correct. If we pass `--doctest-modules` to the `pytest` command, it will search `.py` files for docstrings with example blocks and run them:
+Since this is valid Python code, we can ask pytest to run this code and check
+that the output we claimed would be returned is correct. If we pass
+`--doctest-modules` to the `pytest` command, it will search `.py` files for
+docstrings with example blocks and run them:
 
 ~~~
 $ pytest -v --doctest-modules
@@ -358,7 +409,7 @@ platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bi
 cachedir: .pytest_cache
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 4 items                                          
+collected 4 items
 
 arrays.py::arrays.add_arrays PASSED                  [ 25%]
 test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [ 50%]
@@ -369,18 +420,28 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 ~~~
 {: .output}
 
-We see here the `arrays.py::arrays.add_arrays` test which has passed. If you get a warning about deprecation then ignore it, this is from a third-party module which is leaking through.
+We see here the `arrays.py::arrays.add_arrays` test which has passed. If you get
+a warning about deprecation then ignore it, this is from a third-party module
+which is leaking through.
 
-Doctests are a really valuable thing to have in your test suite as they ensure that any examples that you are giving work as expected. It's not uncommon for the code to change and for the documentation to be left behind and being able to automatically check all your examples avoids this.
+Doctests are a really valuable thing to have in your test suite as they ensure
+that any examples that you are giving work as expected. It's not uncommon for
+the code to change and for the documentation to be left behind and being able to
+automatically check all your examples avoids this.
 
 > ## Break a doctest
 >
-> Try breaking one of the doctests, either by changing the example or by changing the function implementation. Re-run `pytest` and see how the output changes.
+> Try breaking one of the doctests, either by changing the example or by
+> changing the function implementation. Re-run `pytest` and see how the output
+> changes.
 {: .challenge}
 
 ## Running specific tests
 
-As you increase the number of tests you will come across situations where you only want to run a particular test. To do this, you follow pass the name of the test, as printed by `pytest -v` as an argument to `pytest`. So, if we want to run all tests in `test_arrays.py` we do:
+As you increase the number of tests you will come across situations where you
+only want to run a particular test. To do this, you follow pass the name of the
+test, as printed by `pytest -v` as an argument to `pytest`. So, if we want to
+run all tests in `test_arrays.py` we do:
 
 ~~~
 $ pytest -v test_arrays.py
@@ -393,7 +454,7 @@ platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bi
 cachedir: .pytest_cache
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 3 items                                          
+collected 3 items
 
 test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [ 33%]
 test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [ 66%]
@@ -446,7 +507,9 @@ test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [100%]
 ~~~
 {: .output}
 
-Take a look at the output of `pytest -h` for more options. For example, you can tell `pytest` to only run the tests that failed on the last run with `pytest --last-failed`.
+Take a look at the output of `pytest -h` for more options. For example, you can
+tell `pytest` to only run the tests that failed on the last run with `pytest
+--last-failed`.
 
 
 

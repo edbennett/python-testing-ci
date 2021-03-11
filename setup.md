@@ -4,12 +4,15 @@ title: Setup
 
 ## Python
 
-If you do not already have a Python installation that you are happy with, then follow the instructions at [the Software Carpentry Python lesson][python-novice-inflammation] to get set up.
+If you do not already have a Python installation that you are happy with, then
+follow the instructions at [the Software Carpentry Python
+lesson][python-novice-inflammation] to get set up.
 
 
 ## pytest
 
-Depending how you installed Python, you may already have pytest installed. To check this, open a terminal and run:
+Depending how you installed Python, you may already have pytest installed. To
+check this, open a terminal and run:
 
 ~~~
 $ pytest --version
@@ -33,15 +36,19 @@ $ pip install pytest
 
 ## GitHub
 
-To interact with continuous integration using GitHub Actions, you need to have a GitHub account. To do this, visit [GitHub][github] and sign up for an account, or check that you're able to log in.
+To interact with continuous integration using GitHub Actions, you need to have a
+GitHub account. To do this, visit [GitHub][github] and sign up for an account,
+or check that you're able to log in.
 
 ## Download files
 
-We'll be working with some existing pieces of example software for this lesson. Download [this archive][zip-file] and extract it to a convenient location&mdash;for example, your desktop.
+We'll be working with some existing pieces of example software for this lesson.
+Download [this archive][zip-file] and extract it to a convenient
+location&mdash;for example, your desktop.
 
 
 {% include links.md %}
 
 [github]: github.com
-[python-novice-inflammation]: https://swcarpentry.github.io/python-novice-inflammation
+[python-novice-inflammation]: https://swcarpentry.github.io/python-novice-inflammation  
 [zip-file]: {{ page.root }}/files/code-testing.zip

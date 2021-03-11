@@ -31,9 +31,9 @@ Under the following terms:
   license][cc-by-nc-sa-human], and indicate if changes were made. You may do
   so in any reasonable manner, but not in any way that suggests the
   licensor endorses you or your use.
-  
+
 * **NonCommercial** — You may not use the material for commercial purposes.
-  
+
 * **ShareAlike** — If you remix, transform, or build upon the material, 
   you must distribute your contributions under the same license as the
   original.

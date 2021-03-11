@@ -16,17 +16,35 @@ keypoints:
 - "Write tests functions that use `assert`s to check that the results are as expected. Name the functions to start with `test`, and put them in files starting with `test_` or ending with `_test.py`. Run the tests automatically by calling `pytest`."
 ---
 
-Testing is extremely important. Without testing, you cannot be sure that your code is doing what you think. Testing is an integral part of software development, and where possible should be done _while_ you are writing code, not after the code has been written.
+Testing is extremely important. Without testing, you cannot be sure that your
+code is doing what you think. Testing is an integral part of software
+development, and where possible should be done _while_ you are writing code, not
+after the code has been written.
 
-Most programmers' first approach to testing is to manually check that the code does the right thing. This might include running your code over a particular input file and making sure that a correct-looking plot comes out at the end, or running it with a few known inputs and checking that the results are the same as were obtained on the previous try? This is a start, but has a number of limitations:
+Most programmers' first approach to testing is to manually check that the code
+does the right thing. This might include running your code over a particular
+input file and making sure that a correct-looking plot comes out at the end, or
+running it with a few known inputs and checking that the results are the same as
+were obtained on the previous try? This is a start, but has a number of
+limitations:
 
-* If the changes you've made have an effect on an area of code not relied on by the check that you're currently using, then how do you know that that effect hasn't broken anything?
-* How can you be sure that there's not a subtle bug that means that the output is incorrect in a way that isn't immediately obvious?
-* If there is a problem, how will you be able to work out exactly which line of code it causing it?
+* If the changes you've made have an effect on an area of code not relied on by
+  the check that you're currently using, then how do you know that that effect
+  hasn't broken anything?
+* How can you be sure that there's not a subtle bug that means that the output
+  is incorrect in a way that isn't immediately obvious?
+* If there is a problem, how will you be able to work out exactly which line of
+  code it causing it?
 
-In order to be confident that our code it giving a correct output, a test suite is useful which provides a set of known inputs and checks that the code matches a set of known, expected outputs. To make it easier to locate where a bug is occuring, it's a good idea to make each individual test run over as small an amount of code as possible so that if _that_ test fails, you know where to look for the problem. In Python this "small unit of code" is usually a function.
+In order to be confident that our code it giving a correct output, a test suite
+is useful which provides a set of known inputs and checks that the code matches
+a set of known, expected outputs. To make it easier to locate where a bug is
+occuring, it's a good idea to make each individual test run over as small an
+amount of code as possible so that if _that_ test fails, you know where to look
+for the problem. In Python this "small unit of code" is usually a function.
 
-To begin, let's look at a Python function to add lists of numbers. This is in the `arrays` directory, in the `arrays.py` file.
+To begin, let's look at a Python function to add lists of numbers. This is in
+the `arrays` directory, in the `arrays.py` file.
 
 ~~~
 """
@@ -56,7 +74,8 @@ def add_arrays(x, y):
 ~~~
 {: .language-python}
 
-Since the name of the module we want to test is `arrays`, let's make a file called `test_arrays.py` which contains the following:
+Since the name of the module we want to test is `arrays`, let's make a file
+called `test_arrays.py` which contains the following:
 
 ~~~
 from arrays import add_arrays
@@ -65,9 +84,9 @@ def test_add_arrays():
     a = [1, 2, 3]
     b = [4, 5, 6]
     expect = [5, 7, 9]
-    
+
     output = add_arrays(a, b)
-    
+
     if output == expect:
         print("OK")
     else:
@@ -77,7 +96,11 @@ test_add_arrays()
 ~~~
 {: .language-python}
 
-This script defines a function called `test_add_arrays` which defines some known inputs (`a` and `b`) and a known, matching output (`expect`). It passes them to the function `add_arrays` and compares the output to expected. It will either print `OK` or `BROKEN` depending on whether it's working or not. Finally, we explicitly call the test function.
+This script defines a function called `test_add_arrays` which defines some known
+inputs (`a` and `b`) and a known, matching output (`expect`). It passes them to
+the function `add_arrays` and compares the output to expected. It will either
+print `OK` or `BROKEN` depending on whether it's working or not. Finally, we
+explicitly call the test function.
 
 When we run the script in the Terminal, we see it output `OK`:
 
@@ -94,12 +117,16 @@ OK
 
 > ## Break a test
 >
-> Break the test by changing either `a`, `b` or `expect` and rerun the test script. Make sure that it prints `BROKEN` in this case. Change it back to a working state once you've done this.
+> Break the test by changing either `a`, `b` or `expect` and rerun the test
+> script. Make sure that it prints `BROKEN` in this case. Change it back to a
+> working state once you've done this.
 {: .challenge}
 
 ## Asserting
 
-The method used here works and runs the code correctly but it doesn't give very useful output. If we had five test functions in our file and three of them were failing we'd see something like:
+The method used here works and runs the code correctly but it doesn't give very
+useful output. If we had five test functions in our file and three of them were
+failing we'd see something like:
 
 ~~~
 OK
@@ -110,13 +137,20 @@ BROKEN
 ~~~
 {: .output}
 
-We'd then have to cross-check back to our code to see which tests the `BROKEN`s referred to.
+We'd then have to cross-check back to our code to see which tests the `BROKEN`s
+referred to.
 
-To be able to automatically relate the output of the failing test to the place where your test failed, you can use an `assert` statement.
+To be able to automatically relate the output of the failing test to the place
+where your test failed, you can use an `assert` statement.
 
-An `assert` statement is followed by something which is either _truthy_ or _falsy_. A falsy expression is something which, when converted to a bool gives `False`. This includes empty lists, the number `0` and `None`; everything else is considered truthy. The full list is available in [the documentation][truthiness].
+An `assert` statement is followed by something which is either _truthy_ or
+_falsy_. A falsy expression is something which, when converted to a bool gives
+`False`. This includes empty lists, the number `0` and `None`; everything else
+is considered truthy. The full list is available in [the
+documentation][truthiness].
 
-If it is truthy then nothing happens, but if it is falsy then an exception is raised:
+If it is truthy then nothing happens, but if it is falsy then an exception is
+raised:
 
 ~~~
 assert 5 == 5
@@ -130,7 +164,7 @@ AssertionError                            Traceback (most recent call last)
 <ipython-input-6-05598cd61862> in <module>
 ----> 1 assert 5 == 6
 
-AssertionError: 
+AssertionError:
 ~~~
 {: .output}
 
@@ -143,9 +177,9 @@ def test_add_arrays():
     a = [1, 2, 3]
     b = [4, 5, 6]
     expect = [5, 7, 9]
-    
+
     output = add_arrays(a, b)
-    
+
     assert output == expect
 
 test_add_arrays()
@@ -171,19 +205,32 @@ AssertionError
 ~~~
 {: .output}
 
-Which, like all exception messages gives us the location in the file at which the error occurred. This has the avantage that if we had many test functions being run it would tell us which one failed and on which line.
+Which, like all exception messages gives us the location in the file at which
+the error occurred. This has the avantage that if we had many test functions
+being run it would tell us which one failed and on which line.
 
-The downside of using an `assert` like this is that as soon as one test fails, the whole script will halt and you'll only be informed of that one test.
+The downside of using an `assert` like this is that as soon as one test fails,
+the whole script will halt and you'll only be informed of that one test.
 
 ## pytest
 
-There's a few things that we've been doing so far that could be improved. Firstly, for every test function that we write we then have to explicitly call it at the bottom of the test script like` test_add_arrays()`. This is error-prone as we might write a test function and forget to call it and then we would miss any errors it would catch.
+There's a few things that we've been doing so far that could be improved.
+Firstly, for every test function that we write we then have to explicitly call
+it at the bottom of the test script like` test_add_arrays()`. This is
+error-prone as we might write a test function and forget to call it and then we
+would miss any errors it would catch.
 
-Secondly, we want nice, useful output from our test functions. Something better than the nothing/exception that a plain `assert` gives us. It would be nice to get a green `PASSED` for the good tests and a red `FAILED` for the bad ones alongside the name of the test in question.
+Secondly, we want nice, useful output from our test functions. Something better
+than the nothing/exception that a plain `assert` gives us. It would be nice to
+get a green `PASSED` for the good tests and a red `FAILED` for the bad ones
+alongside the name of the test in question.
 
-Finally, we want to make sure that all tests are run even if a test early in the process fails.
+Finally, we want to make sure that all tests are run even if a test early in the
+process fails.
 
-Luckily, there is tool called _pytest_ which can give us all of these things. It will work on our test script almost exactly as written with only one change needed.
+Luckily, there is tool called _pytest_ which can give us all of these things. It
+will work on our test script almost exactly as written with only one change
+needed.
 
 Remove the call to `test_add_arrays()` on the last line of the file:
 
@@ -194,9 +241,9 @@ def test_add_arrays():
     a = [1, 2, 3]
     b = [4, 5, 6]
     expect = [5, 7, 9]
-    
+
     output = add_arrays(a, b)
-    
+
     assert output == expect
 ~~~
 {: .language-python}
@@ -213,7 +260,7 @@ $ pytest
 platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 1 item                                           
+collected 1 item
 
 test_arrays.py .                                     [100%]
 
@@ -221,13 +268,21 @@ test_arrays.py .                                     [100%]
 ~~~
 {: .output}
 
-Pytest will do two stages. First it will try to locate all the test functions that it can find and then it will run each of them in turn, reporting the results.
+Pytest will do two stages. First it will try to locate all the test functions
+that it can find and then it will run each of them in turn, reporting the
+results.
 
-Here you can see that it's found that the file `test_arrays.py` contains a single test function. The green dot next to the name of the file signifies the passing test. It then prints a summary at the end saying "1 passed".
+Here you can see that it's found that the file `test_arrays.py` contains a
+single test function. The green dot next to the name of the file signifies the
+passing test. It then prints a summary at the end saying "1 passed".
 
-The way that pytest works is that it looks for files which are called `test_*.py` or `*_test.py` and look inside those for functions whose names begin with `test`. It will then run those functions one at a time, reporting the results of each in turn.
+The way that pytest works is that it looks for files which are called
+`test_*.py` or `*_test.py` and look inside those for functions whose names begin
+with `test`. It will then run those functions one at a time, reporting the
+results of each in turn.
 
-To see what it looks like when you have a failing test, let's deliberately break the test code by giving a wrong expected result:
+To see what it looks like when you have a failing test, let's deliberately break
+the test code by giving a wrong expected result:
 
 ~~~
 from arrays import add_arrays
@@ -236,9 +291,9 @@ def test_add_arrays():
     a = [1, 2, 3]
     b = [4, 5, 6]
     expect = [5, 7, 999]  # Changed this to break the test
-    
+
     output = add_arrays(a, b)
-    
+
     assert output == expect
 ~~~
 {: .language-python}
@@ -255,7 +310,7 @@ $ pytest
 platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 1 item                                           
+collected 1 item
 
 test_arrays.py F                                     [100%]
 
@@ -266,9 +321,9 @@ _____________________ test_add_arrays ______________________
         a = [1, 2, 3]
         b = [4, 5, 6]
         expect = [5, 7, 999]  # Changed this to break the test
-    
+
         output = add_arrays(a, b)
-    
+
 >       assert output == expect
 E       assert [5, 7, 9] == [5, 7, 999]
 E         At index 2 diff: 9 != 999
@@ -281,20 +336,28 @@ FAILED test_arrays.py::test_add_arrays - assert [5, 7, 9]...
 ~~~
 {: .output}
 
-The output from this is better than we saw with the plain `assert`. It's printing the full context of the contents of the test function with the line where the `assert` is failing being marked with a `>`. It then gives an expanded explanation of why the assert failed. Before we just got `AssertionError` but now it prints out the contents of `output` and `expect` and tells us that at index 2 of the list it's finding a `9` where we told it to expect a `999`.
+The output from this is better than we saw with the plain `assert`. It's
+printing the full context of the contents of the test function with the line
+where the `assert` is failing being marked with a `>`. It then gives an expanded
+explanation of why the assert failed. Before we just got `AssertionError` but
+now it prints out the contents of `output` and `expect` and tells us that at
+index 2 of the list it's finding a `9` where we told it to expect a `999`.
 
-Before continuing, make sure that you change the file back to its previous contents by changing that `999` back to a `9`.
+Before continuing, make sure that you change the file back to its previous
+contents by changing that `999` back to a `9`.
 
 
 > ## Test subtraction
 >
-> In the `arrays.py` file you can see another function defined, `subtract_arrays()`. Write a test that verifies that this function works as expected.
+> In the `arrays.py` file you can see another function defined,
+> `subtract_arrays()`. Write a test that verifies that this function works as
+> expected.
 >
 >> ## Solution
 >>
 >> ~~~
 >> from arrays import subtract_arrays
->> 
+>>
 >> def test_subtract_arrays():
 >>     a = [1, 2, 3]
 >>     b = [6, 2, 1]
@@ -310,13 +373,17 @@ Before continuing, make sure that you change the file back to its previous conte
 
 > ## Test first
 >
-> In the `arrays.py` file you can see that the function `multiply_arrays()` is present, but its functionality hasn't been written.
+> In the `arrays.py` file you can see that the function `multiply_arrays()` is
+> present, but its functionality hasn't been written.
 >
-> First, write a test that this function should pass. Check that the `multiply_arrays()` function fails this test.
+> First, write a test that this function should pass. Check that the
+> `multiply_arrays()` function fails this test.
 >
 > Now, write a `multiply_arrays()` function that lets this test pass.
 >
-> This is the first step towards a process called "test-driven development" (TDD). We won't discuss TDD in detail today, but it is a popular methodology in some parts of the software world.
+> This is the first step towards a process called "test-driven development"
+> (TDD). We won't discuss TDD in detail today, but it is a popular methodology
+> in some parts of the software world.
 >
 >> ## Solution
 >>

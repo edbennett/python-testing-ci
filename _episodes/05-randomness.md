@@ -10,9 +10,16 @@ keypoints:
 - "By repeatedly calling the function being considered, tests can check that the expected statistical properties are observed."
 ---
 
-Up until now we have been testing functions where the output is entirely predictable. In these cases, a handful of tests is usually enough to provide confidence that the software is working as expected. In the real world, however, you might be developing a complex piece of sofware to implement an entirely new algorithm, or model. In certain cases it might not even be clear what the expected outcome is meant to be. Things can be particularly challenging when the software is involves a stochastic element.
+Up until now we have been testing functions where the output is entirely
+predictable. In these cases, a handful of tests is usually enough to provide
+confidence that the software is working as expected. In the real world, however,
+you might be developing a complex piece of sofware to implement an entirely new
+algorithm, or model. In certain cases it might not even be clear what the
+expected outcome is meant to be. Things can be particularly challenging when the
+software is involves a stochastic element.
 
-Let us consider a class to simulate the behaviour of a die. One is provided in the dice package.
+Let us consider a class to simulate the behaviour of a die. One is provided in
+the dice package.
 
 ~~~
 $ cd ../dice
@@ -51,7 +58,9 @@ $ pytest test/test_dice.py::test_valid_roll
 ~~~
 {: .language-bash}
 
-Great, that worked. But because die rolls are random, it could have been a fluke that the test passed this time. In practice, we need to check that the assertions hold repeatedly.
+Great, that worked. But because die rolls are random, it could have been a fluke
+that the test passed this time. In practice, we need to check that the
+assertions hold repeatedly.
 
 ~~~
 def test_always_valid_roll():
@@ -74,15 +83,24 @@ $ pytest test/test_dice.py::test_always_valid_roll
 ~~~
 {: .language-bash}
 
-That is a better test. But does it guarantee that the die is fair? No, it only guarantees that it won't return a number that isn't on the die.
+That is a better test. But does it guarantee that the die is fair? No, it only
+guarantees that it won't return a number that isn't on the die.
 
 ![Comic reading: "int getRandomNumber() {return 4; // chosen by fair dice roll. guaranteed to be random. }"](https://imgs.xkcd.com/comics/random_number.png){:class="img-responsive"}
 
 We still have more work to do to test that the die is fair.
 
-Perhaps we should test the average value. We know that this should equal the sum of the faces of the die, divided by the number of sides. For a six-sided die, this is 3.5. Now, we will never achieve this exactly without an infinite number of rolls (even getting within machine precision could take billions of rolls), which we don't have time for.
+Perhaps we should test the average value. We know that this should equal the sum
+of the faces of the die, divided by the number of sides. For a six-sided die,
+this is 3.5. Now, we will never achieve this exactly without an infinite number
+of rolls (even getting within machine precision could take billions of rolls),
+which we don't have time for.
 
-Fortunately, `pytest` gives us a way to check things are approximately equal, given some tolerance. `pytest.approx()` creates a number with an effective "error bar"&mdash;a quantification of how far from the number we allow to be considered "equal". Then any equality comparison with this approximate number takes into account the uncertainty in it.
+Fortunately, `pytest` gives us a way to check things are approximately equal,
+given some tolerance. `pytest.approx()` creates a number with an effective
+"error bar"&mdash;a quantification of how far from the number we allow to be
+considered "equal". Then any equality comparison with this approximate number
+takes into account the uncertainty in it.
 
 ~~~
 def test_average():
@@ -110,9 +128,11 @@ $ pytest test/test_dice.py::test_average
 ~~~
 {: .language-bash}
 
-This takes us closer, but we're still not there. If we constructed a die with no `2` or `5`, then the average roll would be `(1 + 3 + 4 + 6) / 4`; that is, 3.5.
+This takes us closer, but we're still not there. If we constructed a die with no
+`2` or `5`, then the average roll would be `(1 + 3 + 4 + 6) / 4`; that is, 3.5.
 
-We need to test that the _distribution_ of outcomes is correct, i.e. that each of the six possible outcomes is equally likely.
+We need to test that the _distribution_ of outcomes is correct, i.e. that each
+of the six possible outcomes is equally likely.
 
 ~~~
 def test_fair():
@@ -144,17 +164,30 @@ $ pytest test/test_dice.py::test_fair
 ~~~
 {: .language-bash}
 
-The `Die` class has passed every test we've thrown at it, so we can be confident that it is relatively bug-free for the cases we've tested for. Of course, so far we've only tested 6-sided dice&mdash;we have no guarantee that it works for other numbers of sides, yet.
+The `Die` class has passed every test we've thrown at it, so we can be confident
+that it is relatively bug-free for the cases we've tested for. Of course, so far
+we've only tested 6-sided dice&mdash;we have no guarantee that it works for
+other numbers of sides, yet.
 
-You can extend this approach to any programming problem where you don't know the exact answer up front, including those that are random and those that are just exploratory. Start by focusing on what you do know, and write tests for that. As you understand more what the expected results are, you can expand the test suite.
+You can extend this approach to any programming problem where you don't know the
+exact answer up front, including those that are random and those that are just
+exploratory. Start by focusing on what you do know, and write tests for that. As
+you understand more what the expected results are, you can expand the test
+suite.
 
 > ## Two six-sided dice
 >
-> The file `test/test_dice.py` in the `dice` directory contains an empty function, `test_double_roll()`, for checking that the distribution for the sum of two six-sided die rolls is correct. Fill in the body of this function and run `pytest` to verify that your test passes.
+> The file `test/test_dice.py` in the `dice` directory contains an empty
+> function, `test_double_roll()`, for checking that the distribution for the sum
+> of two six-sided die rolls is correct. Fill in the body of this function and
+> run `pytest` to verify that your test passes.
 >
-> To implement this test, you'll need to know that the probability of the sum of two rolls of an \\(n\\)-sided die having a value \\(x\\) is given by:
+> To implement this test, you'll need to know that the probability of the sum of
+> two rolls of an \\(n\\)-sided die having a value \\(x\\) is given by:
 > \\[p(x) = \frac{n-|x-(n+1)|}{n^2}\\]
-> for \\(x\\) between 2 and 2\\(n\\). This is implemented as a helper function `prob_double_roll(x, n)` - for example, `prob_double_roll(4, 6)` calculates the probability of two 6-sided die rolls summing to 4.
+> for \\(x\\) between 2 and 2\\(n\\). This is implemented as a helper function
+> `prob_double_roll(x, n)` - for example, `prob_double_roll(4, 6)` calculates
+> the probability of two 6-sided die rolls summing to 4.
 >
 > ~~~
 > def prob_double_roll(x, n):
@@ -211,7 +244,8 @@ You can extend this approach to any programming problem where you don't know the
 
 > ## Two \\(n\\)-sided dice
 >
-> Parametrize the test in the previous challenge so that it works for any pair of \\(n\\)-sided dice. Test this using five- and seven-sided dice.
+> Parametrize the test in the previous challenge so that it works for any pair
+> of \\(n\\)-sided dice. Test this using five- and seven-sided dice.
 >
 >> ## Solution
 >>
