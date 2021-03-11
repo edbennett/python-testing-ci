@@ -157,14 +157,7 @@ Clicking on this will take you to the GitHub Actions page for the test workflow,
 
 Because we've noticed that the tests are failing, we can open an _issue_ on GitHub to alert people to this. Click on the **Issues** tab followed by the **New issue** button. Give your issue whatever title you like, then hit submit. It's good practice to give a minimal example that illustrates the problem. This helps the owner of the repository to reproduce the problem. You could also provide a new unit test if none of the current ones trigger the bug. In this case, we already have a good test that catches the error.
 
-![Screen shot of a recently created issue, with the title "Cells at top of grid have incorrect neighbour counts" and the text "There appears to be a bug with cells in the top row of a grid. For example, the following fails:
-
-# Cell on top edge of 4x4 grid.
-c = Cell(2, 3, 4, 4)
-
-# Should have 3 neighbours.
-assert c.neighbours() == 3
-"](../fig/ci-4.png)
+![Screen shot of a recently created issue, with the title "Cells at top of grid have incorrect neighbour counts" and the text "There appears to be a bug with cells in the top row of a grid. For example, the following fails. Cell on top edge of 4x4 grid. c = Cell(2, 3, 4, 4) Should have 3 neighbours. assert c.neighbours() == 3"](../fig/ci-4.png)
 
 
 ## Pushing a fix
