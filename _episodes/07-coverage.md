@@ -78,7 +78,7 @@ Looking through line-by-line, we can see that places that aren't tested include 
 > Conversely, 100% coverage does not guarantee that every possible problem has been discovered. If the same person writes the tests and the code, it's likely that a forgotten corner case in the code will also be forgotten in the test suite; as there is no code there to not be tested, the coverage statistic will not highlight a problem here.
 >
 > Code coverage is just one tool in your testing arsenal to help you identify areas you may have forgotten to test; it is not useful as a metric to compare between projects.
-> {: .callout}
+{: .callout}
 
 
 ## Coverage and continuous integration
