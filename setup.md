@@ -43,4 +43,5 @@ We'll be working with some existing pieces of example software for this lesson. 
 {% include links.md %}
 
 [github]: github.com
+[python-novice-inflammation]: https://swcarpentry.github.io/python-novice-inflammation
 [zip-file]: {{ page.root }}/files/code-testing.zip
