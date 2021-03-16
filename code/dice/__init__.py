@@ -1,1 +1,1 @@
-from .dice import Dice
+from .dice import Die
