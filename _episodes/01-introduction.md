@@ -393,7 +393,7 @@ contents by changing that `999` back to a `9`.
 >> def test_multiply_arrays():
 >>     a = [1, 2, 3]
 >>     b = [4, 5, 6]
->>     expect = [1, 10, 18]
+>>     expect = [4, 10, 18]
 >>
 >>     output = multiply_arrays
 >>
@@ -423,7 +423,7 @@ contents by changing that `999` back to a `9`.
 >>
 >>     z = []
 >>     for x_, y_ in zip(x, y):
->>         z.append(x_ - y_)
+>>         z.append(x_ * y_)
 >>
 >>     return z
 >> ~~~
