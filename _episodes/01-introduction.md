@@ -423,7 +423,7 @@ contents by changing that `999` back to a `9`.
 >>
 >>     z = []
 >>     for x_, y_ in zip(x, y):
->>         z.append(x_ - y_)
+>>         z.append(x_ * y_)
 >>
 >>     return z
 >> ~~~
