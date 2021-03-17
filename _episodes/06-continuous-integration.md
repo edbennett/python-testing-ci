@@ -184,7 +184,7 @@ you just created. Once again, replace `USERNAME` with your actual GitHub
 username.
 
 ~~~
-$ git remote add origin remote https://github.com/USERNAME/grid.git
+$ git remote add origin https://github.com/USERNAME/grid.git
 ~~~
 {: .language-bash}
 
