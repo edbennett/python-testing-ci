@@ -154,12 +154,14 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9]
 
+
+
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
