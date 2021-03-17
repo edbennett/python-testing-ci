@@ -114,7 +114,11 @@ def test_average():
 
     # Calculate the sum of the die rolls.
     total = 0
-    for i in range(0, 100000):
+    
+    # Set the number of rolls.
+    rolls = 100000
+
+    for i in range(0, rolls):
         total += die.roll()
 
     # Check that the average matches the expected value.
