@@ -88,6 +88,32 @@ action, so if you have many actions you can identify which one has done what.
 whenever there is a push to the `main` branch, or a pull request to it. Finally,
 we define one job, which is to build (and run) the software).
 
+> ## Default git branch naming
+>
+> Traditionally the default branch in a git repository has been called "master".
+> Recently there have been an effort to change this (see, for example, [this
+> article][git-branch-name]) to a term that is not associated with slavery.
+> GitHub has opted to now call its default branch `main`, but your version of
+> `git` probably still defaults to `master`. The GitHub Actions template shown
+> above expects a branch called `main`. You can solve this in several ways:
+>
+> 1. Rename your `master` branch after you create the repository and make the
+>    first commit. This is the method recommended by GitHub.
+>    ~~~
+>    $ git branch -M main
+>    ~~~
+>    {: .language-bash}
+> 2. Before creating the repository, change the default branch name for all new
+>    repositories using `git config`
+>    ~~~
+>    $ git config --global init.defaultBranch main
+>    ~~~
+>    {: .language-bash}
+> 3. Keep the branch name as it is (or choose another name that you prefer) and
+>    change the branch name used by GitHub Actions. Then, change the
+>    `branches: [ main ]` line in the `on` section to the name of your branch.
+{: .callout}
+
 The `build` job then defines what it needs: to run on the most recent version of
 Ubuntu, and to test three Python versions, each of which will run entirely
 separately. Then it lists the steps that it will perform: first it checks out
@@ -335,6 +361,7 @@ next to the first commit, a green tick (passed) next to the second, and nothing
 {: .challenge}
 
 [ci]: https://en.wikipedia.org/wiki/Continuous_integration
+[git-branch-name]: https://sfconservancy.org/news/2020/jun/23/gitbranchname/
 [github]: https://github.com
 [pypi]: https://pypi.org
 [starter-workflows]: https://github.com/actions/starter-workflows
