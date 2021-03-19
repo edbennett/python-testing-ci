@@ -25,7 +25,7 @@ the different bacteria are. It already has tests written for most functions.
 
 > ## Your task
 > 
-> 1. Fork the repository ([https://github.com/CDT-AIMLAC/pl_curves](https://github.com/CDT-AIMLAC/pl_curves)). You don't have push access to the original
+> 1. Fork [the repository][pl-curves]. You don't have push access to the original
 >    repository, so you will need to use your own copy of it.
 > 2. Update the CI and Codecov badges to point to your copy of the repository.
 >    Pushing these changes should automatically run the test suite and update
@@ -48,8 +48,9 @@ the different bacteria are. It already has tests written for most functions.
 >    Upgrade the operating system being tested from Ubuntu 18.04 to Ubuntu 20.04.
 >    As with upgrading Python, the test suite helps us check that the code still
 >    runs on a newer operating system.
-> 7. Upgrade to Pandas version 1.03. Again, see if this breaks anything. If it
->    does, then fix the issues, and ensure that the test suite passes again.
+> 7. Upgrade to the most recent version of Pandas. Again, see if this breaks
+>    anything. If it does, then fix the issues, and ensure that the test suite
+>    passes again.
 >
 > Hint: In general, before changes are made to libraries that will break
 > existing software using those libraries, they are "deprecated" for some period
