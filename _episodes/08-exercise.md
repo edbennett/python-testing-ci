@@ -25,7 +25,7 @@ the different bacteria are. It already has tests written for most functions.
 
 > ## Your task
 > 
-> 1. Fork this repository. You don't have push access to the original
+> 1. Fork the repository ([https://github.com/CDT-AIMLAC/pl_curves](https://github.com/CDT-AIMLAC/pl_curves)). You don't have push access to the original
 >    repository, so you will need to use your own copy of it.
 > 2. Update the CI and Codecov badges to point to your copy of the repository.
 >    Pushing these changes should automatically run the test suite and update
@@ -35,15 +35,20 @@ the different bacteria are. It already has tests written for most functions.
 > 4. Currently, some of the tests for the repository fail. Work out why this is
 >    happening, and fix the issues. Check that they are fixed in the CI workflow
 >    as well.
-> 5. Currently, the code is only tested for Python versions up to 3.7. Since
->    Python has moved on now, add 3.8 and 3.9 as targets for the CI. Do the
+> 5. Currently, the code is only tested for Python versions up to 3.6. Since
+>    Python has moved on now, add 3.7, 3.8 and 3.9 as targets for the CI. Do the
 >    tests pass now? If not, identify what has caused them to fail, and fix the
 >    issues you identify. This is an important reason for having a test suite:
 >    sometimes changes entirely external to your code will break your code.
 >    Without a test suite, you don't know whether this has happened until
 >    someone points out that your new results don't match your older ones!
 >    Having CI set up allows easy testing of multiple different versions.
-> 6. Upgrade to Pandas version 1.03. Again, see if this breaks anything. If it
+> 6. Currently the code is being tested against Ubuntu 18.04 (released April 2018).
+>    A new long term support release of Ubuntu came out in April 2020 (version 20.04).
+>    Upgrade the operating system being tested from Ubuntu 18.04 to Ubuntu 20.04.
+>    As with upgrading Python, the test suite helps us check that the code still
+>    runs on a newer operating system.
+> 7. Upgrade to Pandas version 1.03. Again, see if this breaks anything. If it
 >    does, then fix the issues, and ensure that the test suite passes again.
 >
 > Hint: In general, before changes are made to libraries that will break
