@@ -333,7 +333,7 @@ next to the first commit, a green tick (passed) next to the second, and nothing
 > GitHub has a whole catalogue of example workflows available that can do a wide
 > variety of things. A few are suggested when you click the **New Workflow**
 > button in the **Actions** tab, and more can be found at [the
-> `starter-workflows` repository](starter-workflows). Some possibilities are to
+> `starter-workflows` repository][starter-workflows]. Some possibilities are to
 > automatically push new releases to [PyPI][pypi], and to automatically style
 > check all code against a defined house style (for example, PEP 8).
 {: .callout}
