@@ -5,8 +5,8 @@ title: Setup
 ## Python
 
 If you do not already have a Python installation that you are happy with, then
-follow the instructions at [the Software Carpentry Python
-lesson][python-novice-inflammation] to get set up.
+follow the instructions in [the Software Carpentry workshop template
+lesson][workshop-template-python] to get set up.
 
 
 ## pytest
@@ -34,6 +34,14 @@ $ pip install pytest
 {: .language-bash}
 
 
+## Git
+
+To interact with continuous integration, you will need to be able to use the Git
+version control system. If you don't already have Git installed, then follow the
+instructions in [the Software Carpentry workshop template][workshop-template-git]
+to get Git set up.
+
+
 ## GitHub
 
 To interact with continuous integration using GitHub Actions, you need to have a
@@ -50,5 +58,6 @@ location&mdash;for example, your desktop.
 {% include links.md %}
 
 [github]: github.com
-[python-novice-inflammation]: https://swcarpentry.github.io/python-novice-inflammation  
+[workshop-template-git]: https://carpentries.github.io/workshop-template/#git
+[workshop-template-python]: https://carpentries.github.io/workshop-template/#python
 [zip-file]: {{ page.root }}/files/code-testing.zip
