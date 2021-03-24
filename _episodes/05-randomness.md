@@ -217,7 +217,7 @@ suite.
 >>     # Store the expected probabilities for the sum of two dice.
 >>     expect = {}
 >>     for x in range(2, 13):
->>         expect[x] = prob_double_roll(x, sides)
+>>         expect[x] = prob_double_roll(x, 6)
 >> 
 >>     # Create a dictionary to hold the tally for each outcome.
 >>     tally = {}
@@ -225,9 +225,10 @@ suite.
 >>         tally[key] = 0
 >> 
 >>     # Initialise the die.
->>     die = Die(sides)
+>>     die = Die(6)
 >> 
 >>     # Roll two dice 'rolls' times.
+>>     rolls = 5000000
 >>     for i in range(0, rolls):
 >> 
 >>         # Sum the value of the two dice rolls.
