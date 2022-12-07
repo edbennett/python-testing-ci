@@ -260,7 +260,7 @@ def add_arrays(x, y):
 
 We can then test that the function correctly raises the exception when passed
 appropriate data. Inside a pytest function we can require that a specific
-exception is raised by using [`pytest-raises`][pytest.raises] in a `with` block.
+exception is raised by using [`pytest.raises`][pytest-raises] in a `with` block.
 `pytest.raises` takes as an argument the type of an exception and if the block
 ends without that exception having been rasied, will fail the test.
 
@@ -409,20 +409,56 @@ platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bi
 cachedir: .pytest_cache
 rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
-collected 4 items
+collected 6 items
 
-arrays.py::arrays.add_arrays PASSED                  [ 25%]
-test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [ 50%]
-test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [ 75%]
-test_arrays.py::test_add_arrays_error PASSED         [100%]
+arrays.py::arrays.add_arrays PASSED                                                                                                                                                [ 16%]
+arrays.py::arrays.divide_arrays FAILED                                                                                                                                             [ 33%]
+arrays.py::arrays.subtract_arrays PASSED                                                                                                                                           [ 50%]
+test_arrays.py::test_add_arrays[1-1-1] PASSED                                                                                                                                      [ 66%]
+test_arrays.py::test_add_arrays[2-2-2] PASSED                                                                                                                                      [ 83%]
+test_arrays.py::test_add_arrays_error PASSED                                                                                                                                       [100%]
 
-==================== 4 passed in 0.18s =====================
+======================================================================================== FAILURES ========================================================================================
+_____________________________________________________________________________ [doctest] arrays.divide_arrays _____________________________________________________________________________
+067
+068     Args:
+069         x (list): The list to divide
+070         y (list): The list to divide by
+071
+072     Returns:
+073         list: the pairwise quotient of ``x`` and ``y``.
+074
+075     Examples:
+076         >>> divide_arrays([3, 12, -25], [3, -4, 5])
+Expected:
+    [1, -3, -5]
+Got:
+    [1.0, -3.0, -5.0]
+
+/Users/edbennett/Desktop/code/arrays/arrays.py:76: DocTestFailure
+================================================================================ short test summary info =================================================================================
+FAILED arrays.py::arrays.divide_arrays
+============================================================================== 1 failed, 5 passed in 0.01s ===============================================================================
 ~~~
 {: .output}
 
-We see here the `arrays.py::arrays.add_arrays` test which has passed. If you get
+(If you get
 a warning about deprecation then ignore it, this is from a third-party module
-which is leaking through.
+which is leaking through.)
+
+We see here the `arrays.py::arrays.add_arrays`
+and `arrays.py::arrays.subtract_arrays` tests,
+which have passed,
+and `arrays.py::arrays.divide_arrays`,
+which failed.
+(If you didn't complete the previous challenge,
+then `arrays.py::arrays.divide_arrays` will also pass.)
+The reason for this can be seen in the output:
+the result printed is different to the one given in the example.
+(Unlike regular tests,
+which compare for equality,
+doctests check that the output _looks_ the same,
+since that is what matters in documentation.)
 
 Doctests are a really valuable thing to have in your test suite as they ensure
 that any examples that you are giving work as expected. It's not uncommon for

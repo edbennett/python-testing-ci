@@ -238,7 +238,7 @@ from books import word_count
     ('internet', 0),
     ('Russia', 71),
     ('Pierre', 1260),
-    (None, 566317),
+    (None, 566334),
 ])
 def test_word_counts(word, count):
     url = "https://www.gutenberg.org/files/2600/2600-0.txt"
@@ -268,7 +268,7 @@ test_books.py::test_word_counts[Prince-1499] PASSED  [ 55%]
 test_books.py::test_word_counts[internet-0] PASSED   [ 66%]
 test_books.py::test_word_counts[Russia-71] PASSED    [ 77%]
 test_books.py::test_word_counts[Pierre-1260] PASSED  [ 88%]
-test_books.py::test_word_counts[None-566317] PASSED  [100%]
+test_books.py::test_word_counts[None-566334] PASSED  [100%]
 
 ==================== 9 passed in 27.46s ====================
 ~~~
@@ -303,7 +303,7 @@ def long_book():
     ('internet', 0),
     ('Russia', 71),
     ('Pierre', 1260),
-    (None, 566317),
+    (None, 566334),
 ])
 def test_word_counts(long_book, word, count):
     assert word_count(long_book, word) == count
@@ -331,7 +331,7 @@ test_books.py::test_word_counts[Prince-1499] PASSED  [ 55%]
 test_books.py::test_word_counts[internet-0] PASSED   [ 66%]
 test_books.py::test_word_counts[Russia-71] PASSED    [ 77%]
 test_books.py::test_word_counts[Pierre-1260] PASSED  [ 88%]
-test_books.py::test_word_counts[None-566317] PASSED  [100%]
+test_books.py::test_word_counts[None-566334] PASSED  [100%]
 
 ==================== 9 passed in 30.57s ====================
 ~~~
@@ -365,7 +365,7 @@ def long_book():
     ('internet', 0),
     ('Russia', 71),
     ('Pierre', 1260),
-    (None, 566317),
+    (None, 566334),
 ])
 def test_word_counts(long_book, word, count):
     assert word_count(long_book, word) == count
@@ -393,7 +393,7 @@ test_books.py::test_word_counts[Prince-1499] PASSED  [ 55%]
 test_books.py::test_word_counts[internet-0] PASSED   [ 66%]
 test_books.py::test_word_counts[Russia-71] PASSED    [ 77%]
 test_books.py::test_word_counts[Pierre-1260] PASSED  [ 88%]
-test_books.py::test_word_counts[None-566317] PASSED  [100%]
+test_books.py::test_word_counts[None-566334] PASSED  [100%]
 
 ==================== 9 passed in 3.06s =====================
 ~~~
