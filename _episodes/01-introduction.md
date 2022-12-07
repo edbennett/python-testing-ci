@@ -395,7 +395,7 @@ contents by changing that `999` back to a `9`.
 >>     b = [4, 5, 6]
 >>     expect = [4, 10, 18]
 >>
->>     output = multiply_arrays
+>>     output = multiply_arrays(a, b)
 >>
 >>     assert output == expect
 >> ~~~

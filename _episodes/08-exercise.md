@@ -17,7 +17,7 @@ software.
 
 ## The software
 
-We are going to work with `pl_curves`, a piece of researcg software developed by
+We are going to work with `pl_curves`, a piece of research software developed by
 Dr Colin Sauzé at Aberystwyth University, which calculates Pareto–Lorenz (PL)
 curves for calculating the relative abundance of different bacteria in a
 community. It also calculates a Gini coefficient to show how evenly distributed

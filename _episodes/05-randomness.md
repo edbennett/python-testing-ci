@@ -123,7 +123,7 @@ def test_average():
 
     # Check that the average matches the expected value.
     average = total / rolls
-    assert average == pytest.approx(3.5, rel=1e-2)
+    assert average == pytest.approx(expect, rel=1e-2)
 ~~~
 {: .language-python}
 
