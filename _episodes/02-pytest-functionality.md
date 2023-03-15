@@ -331,6 +331,7 @@ from arrays import add_arrays
 @pytest.mark.parametrize("a, b, expect", [
     ([1, 2, 3],    [4, 5, 6],   [5, 7, 9]),
     ([-1, -5, -3], [-4, -3, 0], [-5, -8, -3]),
+    ids=["positive", "negative"]
 ])
 def test_add_arrays(a, b, expect):
     output = add_arrays(a, b)
@@ -358,8 +359,8 @@ rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
 collected 3 items
 
-test_arrays.py::test_add_arrays[a0-b0-expect0] PASSED [ 33%]
-test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [ 66%]
+test_arrays.py::test_add_arrays[positive] PASSED [ 33%]
+test_arrays.py::test_add_arrays[negative] PASSED [ 66%]
 test_arrays.py::test_add_arrays_error PASSED         [100%]
 
 ==================== 3 passed in 0.03s =====================
@@ -377,6 +378,7 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 >> @pytest.mark.parametrize("a, b, expected_error", [
 >>     ([1, 2, 3], [4, 5], ValueError),
 >>     ([1, 2], [4, 5, 6], ValueError),
+>>     ids=['second shorter','first shorter']
 >> ])
 >> def test_add_arrays_error(a, b, expected_error):
 >>     with pytest.raises(expected_error):
@@ -405,6 +407,7 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 >>     ([6], [3], [2]), # Test single-element lists
 >>     ([1, 2, 3], [4, 5, 6], [0.25, 0.4, 0.5]), # Test non-integers
 >>     ([], [], []), # Test empty lists
+>>     ids=["int", "negative int", "single-element", "non-int", "empty lists"]
 >> ])
 >> def test_divide_arrays(a, b, expect):
 >>     output = divide_arrays(a, b)
@@ -416,6 +419,7 @@ test_arrays.py::test_add_arrays_error PASSED         [100%]
 >>     ([1, 2, 3], [4, 5], ValueError),
 >>     ([1, 2], [4, 5, 6], ValueError),
 >>     ([1, 2, 3], [0, 1, 2], ZeroDivisionError),
+>>     ids=['second shorter', 'first shorter', 'zero division']
 >> ])
 >> def test_divide_arrays_error(a, b, expected_error):
 >>     with pytest.raises(expected_error):
