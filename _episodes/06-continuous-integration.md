@@ -338,6 +338,23 @@ next to the first commit, a green tick (passed) next to the second, and nothing
 > check all code against a defined house style (for example, PEP 8).
 {: .callout}
 
+> ## pre-commit
+>
+> Another helpful developer tool somewhat related to CI is
+> [pre-commit][pre-commit] (or more generally `git` hooks). They allow to
+> perform certain actions locally when triggered by various `git` related events
+> like before or after a commit, merge, push, etc. A standard use-case is
+> running automated formatters or code linters before every commit/push but
+> other things are possible, too, like updating a version number. One major
+> difference with respect to CI is that each developer on your team has to
+> manually install the hooks themselves and, thus, could choose to not do so. As
+> opposed to a CI in a central repository, `git` hooks are therefore not capable
+> of enforcing anything but are a pure convenience for the programmer while CI
+> could be used to reject pushes or pull requests automatically. Furthermore,
+> you are supposed to commit often and, hence, committing should be a fast and
+> lightweight action. Therefore, the pre-commit developers explicitly discourage
+> running expensive test suites as a pre-commit hook.
+> {: .callout}
 
 > ## Try it yourself
 >
@@ -366,3 +383,4 @@ next to the first commit, a green tick (passed) next to the second, and nothing
 [pypi]: https://pypi.org
 [starter-workflows]: https://github.com/actions/starter-workflows
 [yaml]: https://en.wikipedia.org/wiki/YAML
+[pre-commit]: https://pre-commit.com
