@@ -173,11 +173,14 @@ that it is relatively bug-free for the cases we've tested for. Of course, so far
 we've only tested 6-sided dice&mdash;we have no guarantee that it works for
 other numbers of sides, yet.
 
-You can extend this approach to any programming problem where you don't know the
-exact answer up front, including those that are random and those that are just
-exploratory. Start by focusing on what you do know, and write tests for that. As
-you understand more what the expected results are, you can expand the test
-suite.
+The important upshot of this approach is that despite the fact that we could not
+predict the exact return value of our function, we were still able to test for
+exactly known invariants and guarantees upheld by it. You can extend this
+approach to any programming problem where the exact return value of a function
+cannot be meaningfully tested for, including those that are random or out of
+your control and those that are just exploratory. Start by focusing on what you
+do know, and write tests for that. As you understand more what the expected
+results are, you can expand the test suite.
 
 > ## Two six-sided dice
 >
