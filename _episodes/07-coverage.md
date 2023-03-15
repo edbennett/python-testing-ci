@@ -98,6 +98,8 @@ the consistency checks in the `__init__()` method of `Cell`, and methods such as
 methods) to have at least one test, so this test suite would benefit from being
 expanded.
 
+> ## How much coverage do I need?
+>
 > It's worth pointing out again that 100% coverage is not essential for a good
 > test suite. If the coverage is below 100%, then that indicates that it's worth
 > understanding where the uncovered lines of code are, and whether it is worth
@@ -116,6 +118,22 @@ expanded.
 > between projects.
 {: .callout}
 
+> ## Configuring `coverage`
+>
+> `coverage` and `pytest-cov` are configurable via a toml file called
+> `.coveragerc` by default. Various details about behaviour and output can be
+> adjusted there. Most notably, explicit exceptions can be defined that exclude
+> certain files, blocks or lines from the coverage report.
+>
+> This is useful in various situation; you can, e.g., exclude the test files
+> from the coverage report to reduce noise or change the commandline output.
+>
+> Another opinionated idea is to indeed aim for 100% code coverage but
+> explicitly exclude what you consider unimportant in your testing. While
+> opponents say that is just cheating, you had to make a concious decision to
+> exclude a piece of code and explicitly documented it in a file (with a comment
+> explaining the decision in the best case).
+{: .callout}
 
 ## Coverage and continuous integration
 
