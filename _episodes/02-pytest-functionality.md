@@ -36,7 +36,7 @@ Lets add a second test to check a different set of inputs and outputs to the
 ~~~
 from arrays import add_arrays
 
-def test_add_arrays1():
+def test_add_arrays_positive():
     a = [1, 2, 3]
     b = [4, 5, 6]
     expect = [5, 7, 9]
@@ -45,7 +45,7 @@ def test_add_arrays1():
 
     assert output == expect
 
-def test_add_arrays2():
+def test_add_arrays_negative():
     a = [-1, -5, -3]
     b = [-4, -3, 0]
     expect = [-5, -8, -3]
@@ -73,8 +73,8 @@ rootdir: /home/matt/projects/courses/software_engineering_best_practices
 plugins: requests-mock-1.8.0
 collected 2 items
 
-test_arrays.py::test_add_arrays1 PASSED              [ 50%]
-test_arrays.py::test_add_arrays2 PASSED              [100%]
+test_arrays.py::test_add_arrays_positive PASSED              [ 50%]
+test_arrays.py::test_add_arrays_negative PASSED              [100%]
 
 ==================== 2 passed in 0.07s =====================
 ~~~
@@ -166,6 +166,57 @@ test_arrays.py::test_add_arrays[a1-b1-expect1] PASSED [100%]
 
 We see that both tests have the same name (`test_arrays.py::test_add_arrays`)
 but each parametrization is differentiated with some square brackets.
+Unfortunately, in the current form this differentiation is not very helpful. If
+you run this test later, you might not remember what `a0-b0-expect0` means, let
+alone the precise numbers or the motivation for choosing them. Were that the
+positive inputs or the negative ones? Did I choose them after fixing a
+particular bug or because it is an important use case or were those just random
+numbers? 
+
+Luckily, we are not the first ones to realise that the above form of
+parametrization misses the expressiveness of explicit function names. That's why
+there is an additional `ids` keyword argument: The following code
+
+~~~
+import pytest
+
+from arrays import add_arrays
+
+@pytest.mark.parametrize("a, b, expect", [
+    ([1, 2, 3],    [4, 5, 6],   [5, 7, 9]),
+    ([-1, -5, -3], [-4, -3, 0], [-5, -8, -3]),
+    ids=['positve','negative']
+])
+def test_add_arrays(a, b, expect):
+    output = add_arrays(a, b)
+
+    assert output == expect
+~~~
+{: .language-python}
+
+now results in the significantly more expressive
+
+~~~
+=================== test session starts ====================
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 2 items
+
+test_arrays.py::test_add_arrays[positive] PASSED [ 50%]
+test_arrays.py::test_add_arrays[negative] PASSED [100%]
+
+==================== 2 passed in 0.03s =====================
+~~~
+{: .output}
+
+If the arguments are better representable as a string than our example with
+lists here, `pytest` often does a reasonably good job in generating `ids`
+automatically from the values (we will see some examples of this in the next
+section). But this still lacks the intentional communication that is associated
+with manually chosen `ids`, so we strongly recommend to use `ids` in all but the
+most trivial cases.
 
 > ## More parameters
 >
@@ -185,6 +236,7 @@ but each parametrization is differentiated with some square brackets.
 >>     ([-1, -5, -3], [-4, -3, 0], [-5, -8, -3]), # Test zeros
 >>     ([41, 0, 3], [4, 76, 32], [45, 76, 35]), # Test larger numbers
 >>     ([], [], []), # Test empty lists
+>>     ids=["positive", "negative", "larger numbers", "empty lists"]
 >> ])
 >> def test_add_arrays(a, b, expect):
 >>     output = add_arrays(a, b)
@@ -194,7 +246,6 @@ but each parametrization is differentiated with some square brackets.
 >> {: .language-python}
 > {: .solution}
 {: .challenge}
-
 
 ## Failing correctly
 
