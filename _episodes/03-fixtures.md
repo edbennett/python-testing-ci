@@ -500,6 +500,7 @@ being done once.
 >> realistic circumstances. For such -- and definitely for the even broader
 >> end-to-end tests that run a whole program from the (simulated) user input to
 >> a final output -- the original approach is well-suited.
+> {: .solution}
 {: .challenge}
 
 [urllib-request]: https://docs.python.org/3/library/urllib.request.html
