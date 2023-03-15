@@ -414,7 +414,8 @@ being done once.
 > behaviour of the tests, and pytest prioritises correctness of the tests over
 > their performance.
 >
-> What sort of behavior would functions have that failed in this way?
+> What sort of behavior would functions have that failed in this way? Can you
+> come up with example code for this?
 >
 >> ## Solution
 >>
@@ -425,6 +426,19 @@ being done once.
 >>
 >> Fixtures should only be re-used within groups of tests that do not mutate
 >> them.
+>>
+>> ~~~
+>> @pytest.fixture(scope="session")
+>> def initially_empty_list():
+>>     return []
+>> 
+>> 
+>> @pytest.mark.parametrize("letter", ["a", "b", "c"])
+>> def test_append_letter(initially_empty_list, letter):
+>>     initially_empty_list.append(letter)
+>>     assert initially_empty_list == [letter]
+>> ~~~
+>> {:. language-python}
 > {: .solution}
 {: .challenge}
 
