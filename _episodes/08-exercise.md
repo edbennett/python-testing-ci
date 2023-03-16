@@ -27,24 +27,25 @@ of test purposes here. The major ones were discussed in the lesson; some more
 exotic ones should be seen as suggestions for you to try. A test can have more
 than one of these purposes:
 
-* test for features - The first and simplest test that is capable of verifying
+* *test for features* - The first and simplest test that is capable of verifying
   the correctness of any feature (in the broadest sense) of your code. This is
   the obvious purpose of a test and encountered everywhere in the lesson.
-* test for confidence (in a narrow sense) - Additional tests of the same
+* *test for confidence (in a narrow sense)* - Additional tests of the same
   features that are redundant in that they repeat a test for features with
   qualitatively similar input just to double-check. This is also encountered in
-  the lesson, e.g. in the solution of [More parameters][more_parameters] large
-  numbers aren't really that different from other numbers unless you run into
-  overflow errors (one could even argue that testing the negative numbers in
-  [pytest features][pytest_features] is not qualitatively different and rather
-  to double check). One should be aware of the difference between testing for
-  confidence and necessary feature tests. The former is a convenience that
-  comes at the cost of longer test runs and so it is not always desirable to
-  test redundantly (although certainly better than missing an aspect).
-* test for edge-/corner-cases - Test special input or conditions for which a
+  the lesson, e.g. in the solution of "More parameters" in [pytest
+  features][pytest_features] large numbers aren't really that different from
+  other numbers unless you run into overflow errors (one could even argue that
+  testing the negative numbers in [pytest features][pytest_features] is not
+  qualitatively different and rather  to double check). One should be aware of
+  the difference between testing for confidence and necessary feature tests. The
+  former is a convenience that comes at the cost of longer test runs and so it
+  is not always desirable to test redundantly (although certainly better than
+  missing an aspect).
+* *test for edge-/corner-cases* - Test special input or conditions for which a
   general algorithm needs to be specialised (e.g., NaNs, infinities, overflows,
   empty input, etc.). We did a [whole episode][edge_cases] on this.
-* test for failures - This is part of feature testing but important enough to
+* *test for failures* - This is part of feature testing but important enough to
   mention explicitly: The conditions under which your code fails are part of
   your interface and need to be tested. The user (that probably includes
   yourself) might rely on a raised exception or returned default value in the
@@ -52,7 +53,7 @@ than one of these purposes:
   current approach cannot handle. Any changes in these (even those for the
   better) are changes of the interface and should appear intentionally. This was
   discussed in [pytest features][pytest_features].
-* fuzzy testing - This is broader than testing for failures; if you have
+* *fuzzy testing* - This is broader than testing for failures; if you have
   unexperienced or even malicious users of your project, they might run your
   code with inputs or under conditions that do not make any sense at all and are
   almost impossible to predict. Fuzzy testing is a strategy where you let the
@@ -60,11 +61,11 @@ than one of these purposes:
   make sure that not even the most far-fetched input can break your code. There
   are libraries for that, so you don't have to set up all the boilerplate
   yourself.
-* regression test - After you have found a bug, you can write a test reproducing
+* *regression test* - After you have found a bug, you can write a test reproducing
   the precise conditions under which the bug appeared. Once you fixed it, your
   test will work fine and if a later change risks introducing this bug again, you
   can rest assured that it will be immediately signalled by a failing test.
-* test as a reminder - In most contemporary test frameworks, you can mark a test
+* *test as a reminder* - In most contemporary test frameworks, you can mark a test
   as an "expected failure". Such tests are run during your standard test runs
   but the test framework will complain if they don't fail. This can be a
   convenient way of marking a to-do or a known bug that you don't have time to
@@ -72,7 +73,7 @@ than one of these purposes:
   conditions of the bug in code form and it might be an important information if
   a bug disappeared unexpectedly. Maybe another code change had an effect you
   did not intend?
-* test for fixing an external interface - You can even test code did not write
+* *test for fixing an external interface* - You can even test code did not write
   yourself. If you rely on a particular library, you don't have control over the
   evolution of that library, so it can be a good idea to write a few test cases
   that just use the interface of that library as you do it in your code. If they
@@ -80,7 +81,7 @@ than one of these purposes:
   chase down a rabbit hole of function calls to get the bottom of that but
   instead have a (hopefully well-named) test that immediately signals where the
   problem lies.
-* test for learning an external interface - When you start using a new library,
+* *test for learning an external interface* - When you start using a new library,
   you might play around with it for a while before using it in production just
   to learn how it's used. Why not preserve this in automated tests? You have the
   same effect as if you, e.g., wrote a script or used an interactive session but
@@ -150,3 +151,5 @@ the different bacteria are. It already has tests written for most functions.
 
 
 [pl-curves]: https://github.com/CDT-AIMLAC/pl_curves
+[pytest_features]: https://edbennett.github.io/python-testing-ci/02-pytest-functionality/index.html
+[edge_cases]: https://edbennett.github.io/python-testing-ci/04-edges/index.html
