@@ -114,7 +114,7 @@ def test_left_edge():
     assert c.neighbours() == 3
 
     # Check the coordinates of the neighbours.
-    assert c.left()  == None
+    assert c.left()  is None
     assert c.right() == (1, 2)
     assert c.up()    == (0, 3)
     assert c.down()  == (0, 1)
@@ -146,10 +146,10 @@ def test_bottom_left_corner():
     assert c.neighbours() == 2
 
     # Check the coordinates of the neighbours.
-    assert c.left()  == None
+    assert c.left()  is None
     assert c.right() == (1, 0)
     assert c.up()    == (0, 1)
-    assert c.down()  == None
+    assert c.down()  is None
 ~~~
 {: .language-python}
 

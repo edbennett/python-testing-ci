@@ -414,7 +414,8 @@ being done once.
 > behaviour of the tests, and pytest prioritises correctness of the tests over
 > their performance.
 >
-> What sort of behavior would functions have that failed in this way?
+> What sort of behavior would functions have that failed in this way? Can you
+> come up with example code for this?
 >
 >> ## Solution
 >>
@@ -425,6 +426,80 @@ being done once.
 >>
 >> Fixtures should only be re-used within groups of tests that do not mutate
 >> them.
+>>
+>> ~~~
+>> @pytest.fixture(scope="session")
+>> def initially_empty_list():
+>>     return []
+>> 
+>> 
+>> @pytest.mark.parametrize("letter", ["a", "b", "c"])
+>> def test_append_letter(initially_empty_list, letter):
+>>     initially_empty_list.append(letter)
+>>     assert initially_empty_list == [letter]
+>> ~~~
+>> {:. language-python}
+> {: .solution}
+{: .challenge}
+
+> ## Better ways to (unit) test
+>
+> The above example was explicitly constructed to acquire an expensive resource
+> and exhibit a big advantage when using a fixture but is it actually a good
+> way to test the `word_counts` function? Think about what the `word_counts` is
+> supposed to do. Do you need a whole book to test this?
+> 
+> List advantages and disadvantages of the above approach. Then, come up with
+> another way of testing it that cures the disadvantages (maybe also loosing
+> some of the advantages). Is your approach simpler and less error-prone?
+>
+> It is safe to assume that whenever to test such a function, it is supposed to
+> be used in a larger project. Can you think of a test scenario where the
+> original method is the best?
+>
+>> ## Solution
+>> 
+>> The `word_counts` function is designed to count words in any string. It does
+>> not need a whole book to test counting, so we could have also used tiny test
+>> strings like `""`, `"hello world"`, `"hello, hello world"` to test all
+>> functionality of `word_counts`. In fact, the original approach has a number
+>> of disadvantages:
+>>
+>> * It is (time) expensive because it needs to download the book every time the
+>>   test suite is run. (2s for a test is a very long time if you want to run
+>>   that a test suite of hundreds of those every few minutes.)
+>> * It is brittle regarding various aspects:
+>>   - If you don't have an internet connection, your test fails.
+>>   - If the URL changes, your test fails.
+>>   - If the content changes, your test fails (we had that a few times).
+>> * It is very obscure because you cannot know if the numbers we have given you
+>>   are correct. Maybe the function has a bug that we don't know about because
+>>   admittedly we also just used the output of that function to generate our
+>>   test cases.
+>> 
+>> The one big advantage of the above is that you are using realistic test data.
+>> As opposed to the string `"hello world"`, the book likely contains a lot of
+>> different words, potentially different capitalisation and spellings,
+>> additional punctuation and maybe special characters that your function may or
+>> may not handle correctly. You might need a lot of different test strings to
+>> cover all these cases (and combinations thereof).
+>> 
+>> The alternative approach with tiny test strings cures all of the above
+>> listed disadvantages and the tests will be easy to read, understand and
+>> verify particularly if you use expressive test function names and parameters
+>> `ids`. This is the best way to write a unit test, i.e. a test that is
+>> concerned with this single unit of functionality in isolation and will likely
+>> be run hundreds of times during a coding session.
+>>
+>> Nevertheless, in a bigger project you would want to have other kinds of
+>> tests, too. The `word_counts` functionality will probably be integrated into
+>> a larger aspect of functionality, e.g., a statistical analysis of books. In
+>> such a case, it is equally important to test that the integration of the
+>> various individually tested units worked correctly. Such integration tests
+>> will be run less often than unit tests and might be more meaningful for more
+>> realistic circumstances. For such -- and definitely for the even broader
+>> end-to-end tests that run a whole program from the (simulated) user input to
+>> a final output -- the original approach is well-suited.
 > {: .solution}
 {: .challenge}
 
