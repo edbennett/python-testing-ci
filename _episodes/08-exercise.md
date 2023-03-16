@@ -1,12 +1,14 @@
 ---
 title: "Putting it all together"
-teaching: 5
+teaching: 10
 exercises: 90
 questions:
 - "How can I apply all of these techniques at once to a real application?"
 objectives:
 - "Be able to apply testing and CI techniques to a piece of research software."
 keypoints:
+- "Tests can have very different purposes and you should keep in mind the broad
+  applicability of automated testing."
 - "Testing and CI work well together to identify problems in research software and allow them to be fixed quickly."
 - "If anything is unclear, or you get stuck, please ask for help!"
 ---
