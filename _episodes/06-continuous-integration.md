@@ -66,9 +66,9 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
     - name: Install dependencies
