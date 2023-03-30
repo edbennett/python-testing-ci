@@ -17,12 +17,12 @@ jobs:
         shell: bash
     steps:
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7'
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -35,7 +35,7 @@ jobs:
           python3 -m pip install --upgrade pip setuptools wheel pyyaml==5.3.1 requests
 
       - name: Checkout the lesson
-        uses: actions/checkout@master
+        uses: actions/checkout@v3.5.0
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -89,7 +89,7 @@ jobs:
 
       - name: Checkout github pages
         if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0 && github.ref != 'refs/heads/gh-pages'}}
-        uses: actions/checkout@master
+        uses: actions/checkout@v3.5.0
         with:
           ref: gh-pages
           path: gh-pages
